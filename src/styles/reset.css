@@ -1,0 +1,110 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  vertical-align: baseline;
+  color: currentcolor;
+}
+
+[role="presentation"],
+:disabled {
+  pointer-events: none;
+}
+
+:focus {
+  outline: 1px solid;
+}
+
+@supports selector(:focus-visible) {
+  :focus {
+    outline: none;
+  }
+}
+
+:focus-visible {
+  outline: 1px solid;
+}
+
+:target {
+  scroll-margin-block: 1rlh;
+}
+
+html {
+  text-size-adjust: none;
+}
+
+body {
+  min-height: 100dvh;
+  container-type: inline-size;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  hyphens: auto;
+  text-rendering: geometricprecision;
+}
+
+blockquote,
+body,
+dd,
+dl,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+a:where(:not([class])) {
+  color: currentcolor;
+  text-decoration-skip-ink: auto;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  appearance: unset;
+}
+
+button,
+input[type="button"],
+input[type="checkbox"],
+input[type="radio"],
+select {
+  cursor: pointer;
+}
+
+button {
+  background: unset;
+  border: unset;
+
+  :active {
+    outline: unset;
+  }
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+img,
+picture {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul,
+ol {
+  &:where([class]) {
+    padding: unset;
+    margin: unset;
+    list-style-type: none;
+  }
+}

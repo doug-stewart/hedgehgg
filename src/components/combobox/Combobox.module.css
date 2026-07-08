@@ -1,0 +1,43 @@
+.box {
+  anchor-scope: --combobox;
+  display: inline-grid;
+  position: relative;
+  width: 100%;
+  grid-template: "input" auto / auto;
+}
+
+.input {
+  width: 100%;
+  grid-area: input;
+  anchor-name: --combobox;
+}
+
+.list {
+  display: block;
+  inset: auto;
+  margin: 0;
+  position: absolute;
+  left: anchor(left);
+  top: anchor(bottom);
+  position-anchor: --combobox;
+  width: anchor-size(width);
+  min-width: 0;
+}
+
+.option {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: lightgray;
+}
+
+.clear {
+  grid-area: input;
+  align-self: center;
+  justify-self: end;
+}

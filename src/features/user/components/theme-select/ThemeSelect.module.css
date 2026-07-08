@@ -1,0 +1,30 @@
+.theme {
+  anchor-scope: --theme-picker;
+  anchor-name: --theme-picker;
+  width: max-content;
+  display: flex;
+  aspect-ratio: 1;
+}
+
+.picker {
+  position-anchor: --theme-picker;
+  position: absolute;
+  inset: unset;
+  position-area: bottom center;
+  flex-direction: column;
+
+  &:popover-open {
+    display: flex;
+  }
+}
+
+.toggle {
+  height: 100%;
+  padding: 0;
+
+  svg {
+    display: block;
+    width: auto;
+    height: 100%;
+  }
+}

@@ -1,0 +1,32 @@
+.masthead {
+  --_gap: minmax(calc(var(--spacing) * 0.5), 1fr);
+  display: grid;
+  grid-template:
+    "logo . nav . theme" auto
+    / auto var(--_gap) auto var(--_gap) auto;
+
+  align-items: center;
+}
+
+.logo {
+  grid-area: logo;
+
+  svg {
+    display: block;
+    width: auto;
+    height: var(--spacing);
+  }
+}
+
+.nav {
+  grid-area: nav;
+}
+
+.items {
+  display: flex;
+  gap: calc(var(--spacing) * 0.5);
+}
+
+.theme {
+  grid-area: theme;
+}

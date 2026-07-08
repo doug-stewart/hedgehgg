@@ -1,0 +1,53 @@
+.weather {
+  display: grid;
+  grid-template:
+    "icon ." 1fr
+    "icon title" auto
+    "icon explanation" auto
+    "icon stats" auto
+    "icon ." 1fr
+    / auto 1fr;
+}
+
+.title {
+  grid-area: title;
+}
+
+.icon {
+  grid-area: icon;
+  width: clamp(5rem, 33vw, 10rem);
+  height: auto;
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+
+.explanation {
+  grid-area: explanation;
+}
+
+.stats {
+  display: grid;
+  grid-area: stats;
+  grid-template-columns: repeat(5, max-content);
+  gap: 0 calc(var(--spacing) * 0.5);
+
+  text-align: center;
+
+  dt {
+    grid-row: 1;
+    font-size: 0.6em;
+    text-transform: uppercase;
+  }
+
+  dd {
+    grid-row: 2;
+    font-size: 0.8em;
+    font-weight: 700;
+
+    span {
+      display: block;
+      font-size: 0.75em;
+      font-weight: 400;
+    }
+  }
+}

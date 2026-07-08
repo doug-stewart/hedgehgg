@@ -1,0 +1,25 @@
+:root {
+  /* Layout */
+  --spacing: clamp(1.125rem, 2.25cqi + 0.563rem, 2.25rem); /* 18px, 36px */
+
+  /* Theme */
+  --text: light-dark(#1a1a1a, #f9f9f9);
+  --base: light-dark(#ffffff, #121212);
+
+  color-scheme: light dark;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+body {
+  padding: var(--spacing);
+  font: 1em / 1.4 sans-serif;
+  color: var(--text);
+  background: var(--base);
+}

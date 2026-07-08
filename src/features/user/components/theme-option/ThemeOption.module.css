@@ -1,0 +1,34 @@
+.option {
+  flex: 0 0 auto;
+  anchor-scope: --tooltip;
+  aspect-ratio: 1;
+  position: relative;
+  display: none;
+}
+
+.selected {
+  display: block;
+  outline: 2px solid tomato;
+}
+
+:hover > .option {
+  display: block;
+}
+
+.input {
+  margin: 0;
+  position: absolute;
+  inset: 0;
+  anchor-name: --tooltip;
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 50%;
+}
+
+.selected {
+  color: tomato;
+}

@@ -1,0 +1,21 @@
+.tootlip {
+  position-anchor: --tooltip;
+  position: absolute;
+  inset: unset;
+  position-area: top center;
+  width: max-content;
+  overflow: unset;
+  filter: drop-shadow(0 0 2px oklch(0 0 0 / 0.2));
+}
+
+.arrow {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  display: block;
+  width: 1em;
+  height: 0.6em;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  translate: -50% 0;
+}
