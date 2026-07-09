@@ -10,12 +10,11 @@ import styles from "./Collection.module.css";
 type CollectionProps = { collection: TCollection; limit?: number };
 
 export const Collection = ({ collection, limit = 10 }: CollectionProps) => {
-  const [expanded, setExpanded] = useState(false);
   const { id, name, links } = collection;
-  const searchFilter = useSearchStore((state) => state.filter);
-  const filteredLinks = links.filter((link) =>
-    link.name.toLowerCase().includes(searchFilter.toLowerCase()),
-  );
+
+  const [expanded, setExpanded] = useState(false);
+  const filter = useSearchStore((state) => state.filter);
+  const filtered = links.filter((link) => link.name.toLowerCase().includes(filter.toLowerCase()));
 
   const toggle = () => setExpanded((expanded) => !expanded);
 
@@ -23,13 +22,15 @@ export const Collection = ({ collection, limit = 10 }: CollectionProps) => {
     <li key={id}>
       <h3>{name}</h3>
       <ul className={styles.links}>
-        {filteredLinks.slice(0, expanded ? filteredLinks.length : limit).map((link) => (
+        {filtered.slice(0, expanded ? filtered.length : limit).map((link) => (
           <Link key={link.id} link={link} />
         ))}
       </ul>
-      <button onClick={toggle} type="button">
-        {expanded ? "collapse" : "expand"}
-      </button>
+      {filtered.length > limit && (
+        <button onClick={toggle} type="button">
+          {expanded ? "collapse" : "expand"}
+        </button>
+      )}
     </li>
   );
 };
