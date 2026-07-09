@@ -9,7 +9,7 @@ export const updateProfile = async (profile: NonNullable<User>): Promise<User> =
       throw new Error("User not authenticated");
     }
 
-    const response = await fetch(`/api/profile/${profile.id}`, {
+    const response = await fetch(`/api/profile`, {
       method: "PUT",
       credentials: "include",
       headers: {
