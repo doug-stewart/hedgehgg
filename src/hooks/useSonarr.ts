@@ -11,7 +11,7 @@ export const useSonarr = () => {
   const hasSonarr = Object.hasOwn(profile || {}, "sonarr_api_key");
 
   const { data, isLoading } = useQuery({
-    queryKey: ["user", session.id, "sonarr"],
+    queryKey: ["user", session?.id, "sonarr"],
     queryFn: async () => {
       const response = await fetch(`/api/sonarr/upcoming`, {
         credentials: "include",
