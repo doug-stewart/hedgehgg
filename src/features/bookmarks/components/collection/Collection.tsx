@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { useSearchStore } from "../../../search/stores/search.store";
 import type { Collection as TCollection } from "../../types";

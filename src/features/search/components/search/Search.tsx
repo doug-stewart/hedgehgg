@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Combobox } from "../../../../components/combobox/Combobox";

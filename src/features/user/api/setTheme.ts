@@ -1,4 +1,3 @@
-import { BACKEND_API } from "../../../config";
 import { authClient } from "../../auth/lib/auth-client";
 import type { ThemeValue } from "../types";
 
@@ -10,7 +9,7 @@ export const setTheme = async (theme: ThemeValue): Promise<ThemeValue> => {
       throw new Error("User not authenticated");
     }
 
-    const response = await fetch(`${BACKEND_API}/profile/${session.user.id}/theme`, {
+    const response = await fetch(`/api/profile/${session.user.id}/theme`, {
       method: "PATCH",
       credentials: "include",
       headers: {

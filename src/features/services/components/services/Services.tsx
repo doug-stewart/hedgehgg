@@ -1,3 +1,5 @@
+"use client";
+
 import { useServices } from "../../hooks/useServices";
 import { Service } from "../service/Service";
 

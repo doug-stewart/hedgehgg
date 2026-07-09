@@ -1,5 +1,6 @@
+"use client";
+
 import { useQuery } from "@tanstack/react-query";
-import { BACKEND_API } from "../../../config";
 import { useSession } from "../../auth/hooks/useSession";
 import type { Bookmarks } from "../types";
 
@@ -12,9 +13,9 @@ type LinkwardenStore = {
 export const useLinkwarden = (): LinkwardenStore => {
   const { session, isLoggedIn } = useSession();
   const { data, isLoading, isSuccess } = useQuery({
-    queryKey: ["user", session.session.id, "bookmarks"],
+    queryKey: ["user", session.id, "bookmarks"],
     queryFn: async () => {
-      const response = await fetch(`${BACKEND_API}/linkwarden/all`, {
+      const response = await fetch(`/api/linkwarden/all`, {
         credentials: "include",
       });
       const data = await response.json();

@@ -1,6 +1,6 @@
 "use client";
 
-import { EditService } from "../../services/components/edit-serrvice/EditService";
+import { EditService } from "../../services/components/edit-service/EditService";
 import { useServices } from "../../services/hooks/useServices";
 import { ProfileForm } from "../components/profile-form/ProfileForm";
 import { useProfile } from "../hooks/useProfile";

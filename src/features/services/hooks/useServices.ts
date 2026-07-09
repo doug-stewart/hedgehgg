@@ -1,3 +1,5 @@
+"use client";
+
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useSession } from "../../auth/hooks/useSession";
 import { createService } from "../api/createService";

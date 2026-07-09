@@ -1,3 +1,5 @@
+"use client";
+
 import { useLinkwarden } from "../../hooks/useLinkwarden";
 import { Collection } from "../collection/Collection";
 import styles from "./Bookmarks.module.css";

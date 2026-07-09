@@ -1,8 +1,8 @@
-import LightDark from "../../../assets/images/light-dark.svg?react";
-import MapPin from "../../../assets/images/map-pin.svg?react";
-import Moon from "../../../assets/images/moon.svg?react";
-import Sun from "../../../assets/images/sun.svg?react";
-import type { InlineSVG } from "../../../types";
+import LightDark from "@/assets/images/light-dark.svg";
+import MapPin from "@/assets/images/map-pin.svg";
+import Moon from "@/assets/images/moon.svg";
+import Sun from "@/assets/images/sun.svg";
+import type { InlineSVG } from "@/types";
 import type { ThemeValue } from "../types";
 
 export const themes = [

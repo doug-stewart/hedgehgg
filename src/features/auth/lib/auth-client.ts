@@ -1,9 +1,8 @@
 import { passkeyClient } from "@better-auth/passkey/client";
 import { createAuthClient } from "better-auth/react";
-import { BACKEND_API } from "../../../config";
 
+// Same-origin now (the API is served by this Next app), so baseURL defaults to
+// the current origin and session cookies are sent automatically.
 export const authClient = createAuthClient({
-  baseURL: BACKEND_API,
   plugins: [passkeyClient()],
-  fetchOptions: { credentials: "include" },
 });

@@ -1,4 +1,3 @@
-import { BACKEND_API } from "../../../config";
 import { authClient } from "../../auth/lib/auth-client";
 import type { User } from "../types";
 
@@ -10,7 +9,7 @@ export const updateProfile = async (profile: NonNullable<User>): Promise<User> =
       throw new Error("User not authenticated");
     }
 
-    const response = await fetch(`${BACKEND_API}/profile/${profile.id}`, {
+    const response = await fetch(`/api/profile/${profile.id}`, {
       method: "PUT",
       credentials: "include",
       headers: {

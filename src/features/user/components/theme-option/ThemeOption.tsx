@@ -1,3 +1,5 @@
+"use client";
+
 import clsx from "clsx";
 import { Tooltip } from "../../../../components/tooltip/Tooltip";
 import { useTooltip } from "../../../../hooks/useTooltip";

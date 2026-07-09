@@ -1,3 +1,5 @@
+"use client";
+
 import { Tooltip } from "../../../../components/tooltip/Tooltip";
 import { useTooltip } from "../../../../hooks/useTooltip";
 import type { Service as TService } from "../../types";

@@ -1,3 +1,5 @@
+"use client";
+
 import { type UseMutationResult, useMutation, useQuery } from "@tanstack/react-query";
 import { useSession } from "../../auth/hooks/useSession";
 import { getProfile } from "../api/getProfile";
@@ -20,7 +22,7 @@ export const useProfile = (): Profile => {
 
   const userQuery = useQuery({
     queryKey: ["user", user?.id],
-    queryFn: async () => getProfile(user?.id ?? ""),
+    queryFn: async () => getProfile(),
     staleTime: Infinity,
     enabled: isLoggedIn,
   });

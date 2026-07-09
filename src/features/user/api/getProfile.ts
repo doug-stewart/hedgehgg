@@ -1,8 +1,7 @@
-import { BACKEND_API } from "../../../config";
 import type { User } from "../types";
 
-export const getProfile = async (userId: string) => {
-  const response = await fetch(`${BACKEND_API}/profile/${userId}`, {
+export const getProfile = async () => {
+  const response = await fetch("/api/profile", {
     credentials: "include",
   });
   const data = await response.json();

@@ -1,3 +1,5 @@
+"use client";
+
 import { useMutation } from "@tanstack/react-query";
 import { useWeather } from "../../weather/hooks/useWeather";
 import { setTheme } from "../api/setTheme";

@@ -1,3 +1,5 @@
+"use client";
+
 import { useWeather } from "../../hooks/useWeather";
 import styles from "./Weather.module.css";
 

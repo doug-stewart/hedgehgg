@@ -1,6 +1,8 @@
+"use client";
+
+import Link from "next/link";
 import { useEffect } from "react";
-import { NavLink } from "react-router";
-import Hedgehgg from "../../../../assets/images/hedgehgg.svg?react";
+import Hedgehgg from "@/assets/images/hedgehgg.svg";
 import { ThemeSelect } from "../../../user/components/theme-select/ThemeSelect";
 import { useTheme } from "../../../user/hooks/useTheme";
 import { useSession } from "../../hooks/useSession";
@@ -24,14 +26,14 @@ export const UserHeader = () => {
           {isLoggedIn ? (
             <>
               <li className={styles.item}>
-                <NavLink className={styles.action} to="/nest">
+                <Link className={styles.action} href="/nest">
                   Your Nest
-                </NavLink>
+                </Link>
               </li>
               <li className={styles.item}>
-                <NavLink className={styles.action} to="/profile">
+                <Link className={styles.action} href="/profile">
                   Settings
-                </NavLink>
+                </Link>
               </li>
               <li className={styles.item}>
                 <button className={styles.action} onClick={logout} type="button">
