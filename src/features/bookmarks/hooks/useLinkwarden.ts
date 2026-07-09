@@ -17,7 +17,7 @@ export const useLinkwarden = (): LinkwardenStore => {
   const hasLinkwarden = Object.hasOwn(profile || {}, "linkwarden_token");
 
   const { data, isLoading, isSuccess } = useQuery({
-    queryKey: ["user", session.id, "bookmarks"],
+    queryKey: ["user", session?.id, "bookmarks"],
     queryFn: async () => {
       const response = await fetch(`/api/linkwarden/all`, {
         credentials: "include",
