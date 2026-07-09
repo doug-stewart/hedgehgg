@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import { useProfile } from "@/features/user/hooks/useProfile";
 import { useSession } from "../../auth/hooks/useSession";
 import type { Bookmarks } from "../types";
 
@@ -12,6 +13,9 @@ type LinkwardenStore = {
 
 export const useLinkwarden = (): LinkwardenStore => {
   const { session, isLoggedIn } = useSession();
+  const { profile } = useProfile();
+  const hasLinkwarden = Object.hasOwn(profile || {}, "linkwarden_token");
+
   const { data, isLoading, isSuccess } = useQuery({
     queryKey: ["user", session.id, "bookmarks"],
     queryFn: async () => {
@@ -22,7 +26,7 @@ export const useLinkwarden = (): LinkwardenStore => {
       return data as Error | Bookmarks;
     },
     staleTime: Infinity,
-    enabled: isLoggedIn,
+    enabled: isLoggedIn && hasLinkwarden,
   });
 
   const bookmarks =
