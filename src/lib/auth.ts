@@ -27,6 +27,8 @@ export const auth = betterAuth({
   plugins: [
     admin(),
     passkey({
+      rpID: process.env.NEXT_PUBLIC_SITE_URL ?? "localhost",
+      rpName: "Hedge.gg",
       registration: {
         requireSession: false,
         extensions: { credProps: true },
@@ -35,8 +37,7 @@ export const auth = betterAuth({
             throw new Error("context must be a valid email address");
           }
 
-          const existing =
-            await ctx.context.internalAdapter.findUserByEmail(context);
+          const existing = await ctx.context.internalAdapter.findUserByEmail(context);
 
           if (existing) return existing.user;
 
@@ -46,13 +47,9 @@ export const auth = betterAuth({
           });
         },
         afterVerification: async ({ ctx, user }) => {
-          const fullUser = await ctx.context.internalAdapter.findUserById(
-            user.id,
-          );
+          const fullUser = await ctx.context.internalAdapter.findUserById(user.id);
           if (!fullUser) return;
-          const session = await ctx.context.internalAdapter.createSession(
-            fullUser.id,
-          );
+          const session = await ctx.context.internalAdapter.createSession(fullUser.id);
           if (!session) return;
           await setSessionCookie(ctx, { session, user: fullUser });
         },
