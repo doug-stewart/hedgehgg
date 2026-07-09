@@ -20,7 +20,7 @@ export const useServices = (): UseServicesResult => {
   const { session, isLoggedIn } = useSession();
 
   const servicesQuery = useQuery({
-    queryKey: ["user", session?.user?.id, "services"],
+    queryKey: ["user", session?.id, "services"],
     queryFn: getServices,
     enabled: isLoggedIn,
     staleTime: Infinity,
