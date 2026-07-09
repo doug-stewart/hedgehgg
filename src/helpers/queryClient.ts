@@ -1,11 +1,12 @@
 import {
   defaultShouldDehydrateQuery,
   environmentManager,
+  MutationCache,
   QueryClient,
 } from "@tanstack/react-query";
 
 function makeQueryClient() {
-  return new QueryClient({
+  const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
         staleTime: 60 * 1000,
@@ -15,7 +16,15 @@ function makeQueryClient() {
           defaultShouldDehydrateQuery(query) || query.state.status === "pending",
       },
     },
+    mutationCache: new MutationCache({
+      onSuccess: (_data, _variables, _context, mutation) => {
+        queryClient.invalidateQueries({
+          queryKey: mutation.options.mutationKey,
+        });
+      },
+    }),
   });
+  return queryClient;
 }
 
 let browserQueryClient: QueryClient | undefined;
