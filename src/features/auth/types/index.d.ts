@@ -5,8 +5,8 @@ export type Session = NonNullable<SessionResponse>;
 export type BaseSessionResult = {
   isPending: boolean;
   refetch: () => void;
-  login: () => Promise<ErrorContext | undefined>;
-  signup: (email: string) => Promise<ErrorContext | undefined>;
+  login: () => Promise<void>;
+  signup: (email: string) => Promise<void>;
   logout: () => Promise<void>;
 };
 

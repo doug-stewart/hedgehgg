@@ -1,0 +1,23 @@
+.wrapper {
+  anchor-scope: --user-menu;
+}
+
+.toggle {
+  anchor-name: --user-menu;
+}
+
+.menu {
+  position-anchor: --user-menu;
+  position: absolute;
+  inset: unset;
+  position-area: bottom span-left;
+  flex-direction: column;
+
+  &:popover-open {
+    display: flex;
+  }
+}
+
+.active {
+  background-color: tomato;
+}

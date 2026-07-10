@@ -1,57 +1,53 @@
 "use client";
 
-import type { ErrorContext } from "better-auth/client";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
+import { useNotificationsActions } from "@/features/notifications/store/notifications.store";
 import { authClient } from "../lib/auth-client";
 import type { SessionResult } from "../types";
 
 export const useSession = (): SessionResult => {
   const router = useRouter();
   const { data, isPending, refetch } = authClient.useSession();
+  const { addNotification } = useNotificationsActions();
 
   const signup = useCallback(
     async (email: string) => {
-      let result: ErrorContext | undefined;
-
       await authClient.passkey.addPasskey({
-        name: "Primary Passkey",
         context: email,
         fetchOptions: {
           async onSuccess() {
             await refetch();
           },
           onError(context) {
-            result = context;
+            addNotification({
+              type: "error",
+              message: context.error.message ?? "Could not create your account",
+            });
           },
         },
       });
-
-      return result;
     },
-    [refetch],
+    [refetch, addNotification],
   );
 
   const login = useCallback(async () => {
-    let result: ErrorContext | undefined;
-
-    await authClient.signIn.passkey({
-      fetchOptions: {
-        async onSuccess() {
-          await refetch();
-        },
-        onError(context) {
-          result = context;
-        },
-      },
+    const result = await authClient.signIn.passkey({
+      extensions: { credProps: true },
     });
 
-    if (result?.error.code === "PASSKEY_NOT_FOUND") {
-      console.log("ERROR: User does not exist with this passkey");
+    if (result.error === null) {
+      router.push("/nest");
+      return;
     }
 
-    return result;
-  }, [refetch]);
+    const message =
+      "code" in result.error && result.error.code === "PASSKEY_NOT_FOUND"
+        ? "No account found for this passkey"
+        : (result.error.message ?? "Could not log you in");
+
+    addNotification({ type: "error", message });
+  }, [router, addNotification]);
 
   const logout = async () => {
     await authClient.signOut();
@@ -60,25 +56,25 @@ export const useSession = (): SessionResult => {
 
   const isLoggedIn = !!data?.session;
 
+  const sharedReturnProps = {
+    isPending,
+    refetch,
+    login,
+    signup,
+    logout,
+  };
+
   if (isLoggedIn) {
     return {
       isLoggedIn: true,
       session: data.session,
-      isPending,
-      refetch,
-      login,
-      signup,
-      logout,
+      ...sharedReturnProps,
     };
   }
 
   return {
     isLoggedIn: false,
     session: null,
-    isPending,
-    refetch,
-    login,
-    signup,
-    logout,
+    ...sharedReturnProps,
   };
 };

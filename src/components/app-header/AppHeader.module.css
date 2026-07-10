@@ -1,0 +1,22 @@
+.masthead {
+  display: grid;
+  grid-template:
+    "logo . menu" auto
+    / auto 1fr auto;
+
+  align-items: center;
+}
+
+.logo {
+  grid-area: logo;
+
+  svg {
+    display: block;
+    width: auto;
+    height: var(--spacing);
+  }
+}
+
+.menu {
+  grid-area: menu;
+}
