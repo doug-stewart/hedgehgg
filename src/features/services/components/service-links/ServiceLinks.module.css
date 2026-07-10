@@ -2,4 +2,5 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, calc(var(--spacing) * 3));
   gap: calc(var(--spacing) * 0.25);
+  justify-content: center;
 }
