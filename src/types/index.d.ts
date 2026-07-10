@@ -16,7 +16,7 @@ export type Collection = {
 
 export type Bookmarks = Array<Collection>;
 
-export type Episodie = {
+export type Episode = {
   airingAt: string;
   episodeNumber: number;
   id: number;
@@ -25,7 +25,7 @@ export type Episodie = {
   title: string;
 };
 
-export type Episodes = Array<Episodie>;
+export type Episodes = Array<Episode>;
 
 export type InlineSVG = React.FunctionComponent<
   React.SVGProps<SVGSVGElement> & {

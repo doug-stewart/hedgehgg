@@ -23,3 +23,12 @@ body {
   color: var(--text);
   background: var(--base);
 }
+
+h2 {
+  margin-block: var(--spacing) calc(var(--spacing) * 0.25);
+  font-size: 0.6em;
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+}

@@ -1,0 +1,64 @@
+.show {
+  display: grid;
+  grid-template-areas:
+    "when series"
+    "numbers title";
+  grid-template-rows: subgrid;
+  grid-template-columns: subgrid;
+  grid-row: span 2;
+  grid-column: 1 / -1;
+  gap: 0 0.5em;
+  border-radius: 1em;
+
+  @container (width > 500px) {
+    grid-template-areas: "when series numbers title";
+    grid-row: span 1;
+  }
+}
+
+.when,
+.numbers {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 0 0.6em;
+  font-size: 0.6em;
+  font-weight: 600;
+  color: var(--base);
+  text-transform: uppercase;
+
+  @container (width > 500px) {
+    border-radius: 0.5em;
+  }
+}
+
+.series,
+.title {
+  padding-inline-end: 0.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.when {
+  grid-area: when;
+  background: var(--text);
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+}
+
+.series {
+  grid-area: series;
+}
+
+.numbers {
+  grid-area: numbers;
+
+  background: oklch(from var(--text) l c h / 0.72);
+  border-bottom-right-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
+}
+
+.title {
+  grid-area: title;
+}
