@@ -1,9 +1,8 @@
-import { NotFoundError } from "../errors/AppError";
+import { BadRequestError, NotFoundError } from "../errors/AppError";
 import * as servicesRepository from "../repositories/servicesRepository";
 import type { ServiceBody } from "../schemas/service.schema";
 
-export const listServices = (userId: string) =>
-  servicesRepository.listByUser(userId);
+export const listServices = (userId: string) => servicesRepository.listByUser(userId);
 
 export const getService = async (userId: string, id: number) => {
   const service = await servicesRepository.findByIdForUser(id, userId);
@@ -22,11 +21,7 @@ export const createService = (userId: string, body: ServiceBody) =>
     icon: body.icon ?? null,
   });
 
-export const updateService = async (
-  userId: string,
-  id: number,
-  body: ServiceBody,
-) => {
+export const updateService = async (userId: string, id: number, body: ServiceBody) => {
   const updated = await servicesRepository.updateForUser(id, userId, {
     name: body.name,
     href: body.href,
@@ -45,4 +40,22 @@ export const deleteService = async (userId: string, id: number) => {
     throw new NotFoundError("Service not found");
   }
   return deleted;
+};
+
+export const reorderServices = async (userId: string, ids: number[]) => {
+  const services = await servicesRepository.listByUser(userId);
+  const owned = new Set(services.map((service) => service.id));
+  const requested = new Set(ids);
+
+  const isPermutation =
+    requested.size === ids.length &&
+    requested.size === owned.size &&
+    ids.every((id) => owned.has(id));
+
+  if (!isPermutation) {
+    throw new BadRequestError("Order must list each of your services exactly once");
+  }
+
+  await servicesRepository.reorderForUser(userId, ids);
+  return servicesRepository.listByUser(userId);
 };

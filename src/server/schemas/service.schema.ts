@@ -11,3 +11,10 @@ export const serviceBodySchema = z.object({
 });
 
 export type ServiceBody = z.infer<typeof serviceBodySchema>;
+
+// Every service id owned by the user, in the order they should be displayed.
+export const serviceOrderBodySchema = z.object({
+  ids: z.array(z.number().int()).min(1),
+});
+
+export type ServiceOrderBody = z.infer<typeof serviceOrderBodySchema>;

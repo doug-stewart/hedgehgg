@@ -6,11 +6,7 @@ import type { ColumnType, Generated } from "kysely";
 // Kysely.
 
 // PostgreSQL returns NUMERIC as a string; accept a number or string on write.
-type Numeric = ColumnType<
-  string | null,
-  number | string | null,
-  number | string | null
->;
+type Numeric = ColumnType<string | null, number | string | null, number | string | null>;
 
 export interface ProfileTable {
   id: string;
@@ -24,13 +20,13 @@ export interface ProfileTable {
 }
 
 export interface ServicesTable {
-  // GENERATED ALWAYS AS IDENTITY — omit on insert unless explicitly overriding.
   id: Generated<number>;
   user_id: string;
   name: string;
   href: string;
   abbr: string;
   icon: string | null;
+  sort_order: Generated<number>;
 }
 
 export interface Database {

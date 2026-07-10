@@ -25,7 +25,7 @@ export const ServiceForm = ({
   const { register, handleSubmit, watch, setValue, reset } = formProps;
   const serviceUrl = watch("href");
   const iconValue = watch("icon");
-  const iconUrl = service?.icon || getIconUrl(iconValue);
+  const iconUrl = service?.icon || getIconUrl(iconValue ?? "");
 
   const handleIconSearch = (value: string) => {
     const matches = getIcons(value);

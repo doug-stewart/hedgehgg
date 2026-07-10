@@ -1,4 +1,4 @@
-import type { Insertable, Updateable } from "kysely";
+import { type Insertable, sql, type Updateable } from "kysely";
 import { db } from "../db/database";
 import type { ServicesTable } from "../db/types";
 
@@ -7,7 +7,8 @@ export const listByUser = (userId: string) =>
     .selectFrom("services")
     .selectAll()
     .where("user_id", "=", userId)
-    .orderBy("name")
+    .orderBy("sort_order")
+    .orderBy("id")
     .execute();
 
 export const findByIdForUser = (id: number, userId: string) =>
@@ -21,15 +22,14 @@ export const findByIdForUser = (id: number, userId: string) =>
 export const create = (service: Insertable<ServicesTable>) =>
   db
     .insertInto("services")
-    .values(service)
+    .values({
+      ...service,
+      sort_order: sql<number>`(select coalesce(max(sort_order) + 1, 0) from services where user_id = ${service.user_id})`,
+    })
     .returningAll()
     .executeTakeFirstOrThrow();
 
-export const updateForUser = (
-  id: number,
-  userId: string,
-  data: Updateable<ServicesTable>,
-) =>
+export const updateForUser = (id: number, userId: string, data: Updateable<ServicesTable>) =>
   db
     .updateTable("services")
     .set(data)
@@ -45,3 +45,20 @@ export const removeForUser = (id: number, userId: string) =>
     .where("user_id", "=", userId)
     .returningAll()
     .executeTakeFirst();
+
+export const reorderForUser = async (userId: string, ids: number[]) => {
+  if (ids.length === 0) return;
+
+  await db
+    .updateTable("services")
+    .set((builder) => {
+      let sortOrder = builder.case("id").when(ids[0]).then(0);
+      for (let position = 1; position < ids.length; position++) {
+        sortOrder = sortOrder.when(ids[position]).then(position);
+      }
+      return { sort_order: sortOrder.else(builder.ref("sort_order")).end() };
+    })
+    .where("user_id", "=", userId)
+    .where("id", "in", ids)
+    .execute();
+};

@@ -1,10 +1,13 @@
+import type { UseMutationResult } from "@tanstack/react-query";
+
 export type Service = {
-  id: string;
+  id: number;
   name: string;
   user_id: string;
   abbr: string;
   href: string;
-  icon: string;
+  icon: string | null;
+  sort_order: number;
 };
 
 export type Services = Array<Service>;
@@ -22,4 +25,24 @@ export type IconData = {
   CreatedAt: Date;
 };
 
-export type ServiceMutation = UseMutationResult<Service, Error, NonNullable<Service>, unknown>;
+export type CreateServiceMutation = UseMutationResult<Service, Error, Service, unknown>;
+export type DeleteServiceMutation = UseMutationResult<Service, Error, number, unknown>;
+export type UpdateServiceMutation = UseMutationResult<Service, Error, Service, unknown>;
+
+export type ReorderContext = { previous?: Services };
+
+export type ReorderMutation = UseMutationResult<
+  Services,
+  Error,
+  Array<Service["id"]>,
+  ReorderContext
+>;
+
+export type UseServicesResult = {
+  services: Services;
+  isLoading: boolean;
+  createService: CreateServiceMutation;
+  updateService: UpdateServiceMutation;
+  deleteService: DeleteServiceMutation;
+  reorderServices: ReorderMutation;
+};
