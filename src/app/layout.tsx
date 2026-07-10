@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Providers from "@/components/providers/Providers";
-import { UserHeader } from "@/features/auth/components/user-header/UserHeader";
 import "@/styles/reset.css";
 import "@/styles/index.css";
+import { NotificationsList } from "@/features/notifications/components/notifications-list/NotificationsList";
 
 export const metadata: Metadata = {
   title: "Hedge.gg",
@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          <UserHeader />
+          <NotificationsList />
           {children}
         </Providers>
       </body>
