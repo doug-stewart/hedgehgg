@@ -1,5 +1,6 @@
 "use client";
 
+import { ServiceForm } from "@/features/services/components/service-form/ServiceForm";
 import { EditService } from "../../services/components/edit-service/EditService";
 import { useServices } from "../../services/hooks/useServices";
 import { ProfileForm } from "../components/profile-form/ProfileForm";
@@ -10,12 +11,10 @@ export const Profile = () => {
   const { services, deleteService } = useServices();
 
   const handleDelete = (serviceId: string) => deleteService.mutate(serviceId);
-  const handleEdit = (serviceId: string) => deleteService.mutate(serviceId);
 
   return isSuccess ? (
     <>
-      <title>Profile • Hedge.gg</title>
-      <h1>Profile</h1>
+      <h1>Settings</h1>
       <h2>Integrations</h2>
       <ProfileForm profile={profile} />
       <h2>Services</h2>
@@ -23,16 +22,14 @@ export const Profile = () => {
         {services.map((service) => (
           <li key={service.id}>
             {service.name}
-            <button onClick={() => handleEdit(service.id)} type="button">
-              Edit
-            </button>
+            <EditService service={service} />
             <button onClick={() => handleDelete(service.id)} type="button">
               Delete
             </button>
           </li>
         ))}
       </ul>
-      <EditService />
+      <ServiceForm />
     </>
   ) : null;
 };

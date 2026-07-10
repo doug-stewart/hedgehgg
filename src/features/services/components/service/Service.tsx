@@ -25,7 +25,8 @@ export const Service = ({ service }: ServiceProps) => {
         popoverTargetAction="toggle"
         rel="noopener noreferrer"
       >
-        <img alt={`${name} icon`} className={styles.icon} src={icon} />
+        {/* biome-ignore lint/performance/noImgElement: External service and I don't want them cached */}
+        <img alt={`${name} icon`} className={styles.icon} height={48} src={icon} width={48} />
         <Tooltip id={`service-${abbr}`} ref={tooltipRef}>
           {name}
         </Tooltip>
