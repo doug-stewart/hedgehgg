@@ -27,8 +27,6 @@ export const auth = betterAuth({
   plugins: [
     admin(),
     passkey({
-      // The WebAuthn RP ID must be a bare domain (e.g. "localhost" or "hedge.gg"),
-      // never a full URL — so take the hostname of the site URL rather than the URL itself.
       rpID: process.env.NEXT_PUBLIC_SITE_URL
         ? new URL(process.env.NEXT_PUBLIC_SITE_URL).hostname
         : "localhost",
