@@ -1,16 +1,16 @@
 "use client";
 
 import { useServices } from "../../hooks/useServices";
-import { Service } from "../service/Service";
+import { ServiceLink } from "../service-link/ServiceLink";
 
-import styles from "./Services.module.css";
+import styles from "./ServiceLinks.module.css";
 
-export const Services = () => {
+export const ServiceLinks = () => {
   const { services } = useServices();
   return (
     <ul className={styles.list}>
       {services.map((service) => (
-        <Service key={service.href} service={service} />
+        <ServiceLink key={service.href} service={service} />
       ))}
     </ul>
   );

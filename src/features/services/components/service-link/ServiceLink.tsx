@@ -2,14 +2,14 @@
 
 import { Tooltip } from "../../../../components/tooltip/Tooltip";
 import { useTooltip } from "../../../../hooks/useTooltip";
-import type { Service as TService } from "../../types";
-import styles from "./Service.module.css";
+import type { Service } from "../../types";
+import styles from "./ServiceLink.module.css";
 
-type ServiceProps = {
-  service: TService;
+type ServiceLinkProps = {
+  service: Service;
 };
 
-export const Service = ({ service }: ServiceProps) => {
+export const ServiceLink = ({ service }: ServiceLinkProps) => {
   const { name, href, icon, abbr } = service;
 
   const { tooltipRef, toggleTooltip } = useTooltip();
