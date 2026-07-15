@@ -1,6 +1,6 @@
 :root {
   /* Layout */
-  --spacing: clamp(1.125rem, 2.25cqi + 0.563rem, 2.25rem); /* 18px, 36px */
+  --spacing: clamp(1.125rem, 2.25vi + 0.563rem, 2.25rem); /* 18px, 36px */
 
   /* Theme */
   --text: light-dark(#1a1a1a, #f9f9f9);
@@ -18,17 +18,12 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   padding: var(--spacing);
-  font: 1em / 1.4 sans-serif;
+  font:
+    300 1em / 1.4 var(--font-noto-sans),
+    sans-serif;
   color: var(--text);
   background: var(--base);
-}
-
-h2 {
-  margin-block: var(--spacing) calc(var(--spacing) * 0.25);
-  font-size: 0.6em;
-  font-weight: 600;
-  line-height: 1;
-  text-align: center;
-  text-transform: uppercase;
 }
