@@ -1,5 +1,6 @@
 .masthead {
   display: grid;
+  flex: 0 0 auto;
   grid-template:
     "logo . menu" auto
     / auto 1fr auto;
