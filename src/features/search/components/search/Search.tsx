@@ -38,7 +38,7 @@ export const Search = () => {
     })),
     ...results.map((result) => ({
       label: result.name,
-      value: `${result.id}-${result.url}`,
+      value: result.id,
     })),
   ];
 
