@@ -9,7 +9,7 @@ import styles from "./Weather.module.css";
 
 export const Weather = () => {
   const id = useId();
-  const { tooltipRef, toggleTooltip } = useTooltip();
+  const { tooltipRef, showTooltip, hideTooltip } = useTooltip();
   const { city } = useGeoLocation();
   const { forecast, isLoading } = useWeather();
 
@@ -22,8 +22,10 @@ export const Weather = () => {
       <button
         aria-describedby={`weather-${id}`}
         className={styles.wrapper}
-        onMouseEnter={toggleTooltip}
-        onMouseLeave={toggleTooltip}
+        onBlur={hideTooltip}
+        onFocus={showTooltip}
+        onMouseEnter={showTooltip}
+        onMouseLeave={hideTooltip}
         popoverTarget={`weather-${id}`}
         popoverTargetAction="toggle"
         type="button"
