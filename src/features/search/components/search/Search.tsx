@@ -2,9 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useLinkwardenSearch } from "@/features/bookmarks/hooks/useLinkwardenSearch";
 import { Combobox } from "../../../../components/combobox/Combobox";
 import { getGoogleSuggestions } from "../../helpers/getGoogleSuggestions";
+import { useLinkwardenSearch } from "../../hooks/useLinkwardenSearch";
 import { useSearchStore } from "../../stores/search.store";
 import styles from "./Search.module.css";
 
