@@ -4,8 +4,8 @@
   grid-template:
     "logo . menu" auto
     / auto 1fr auto;
-
   align-items: center;
+  margin-bottom: calc(var(--spacing) * 2);
 }
 
 .logo {
