@@ -257,7 +257,7 @@ export const Combobox = ({
               })}
               data-value={value}
               id={`${internalId}-${value}`}
-              key={value}
+              key={`${label}-${value}`}
               onClick={() => handleSelect(value)}
               onKeyDown={(event) => handleKeySelect(event, value)}
               role="option"
