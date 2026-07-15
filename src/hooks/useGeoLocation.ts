@@ -1,32 +1,26 @@
-"use client";
-
-import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useSession } from "@/features/auth/hooks/useSession";
+import { useProfile } from "@/features/user/hooks/useProfile";
 import { LATITUDE, LONGITUDE } from "../config";
 
-type Geolocation = null | {
-  latitude: number;
-  longitude: number;
-};
-
 export const useGeoLocation = () => {
-  const [geolocation, setGeolocation] = useState<Geolocation>(null);
+  const { session } = useSession();
+  const { profile } = useProfile();
+  const { geolocation_latitude, geolocation_longitude } = profile ?? {};
 
-  if (geolocation === null) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setGeolocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-      },
-      () => {
-        setGeolocation({
-          latitude: LATITUDE,
-          longitude: LONGITUDE,
-        });
-      },
-    );
-  }
+  const cityQuery = useQuery({
+    queryKey: ["user", session?.id, "city"],
+    queryFn: async () => {
+      const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${geolocation_latitude ?? LATITUDE}&longitude=${geolocation_longitude ?? LONGITUDE}&localityLanguage=en`;
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Failed to fetch user city");
+      }
+      return response.json();
+    },
+    staleTime: Infinity,
+    enabled: !!session?.id && !!geolocation_latitude && !!geolocation_longitude,
+  });
 
-  return geolocation;
+  return { city: cityQuery.data?.city, isLoading: cityQuery.isLoading, error: cityQuery.error };
 };
