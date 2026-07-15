@@ -1,21 +1,24 @@
 import { EpisodeCalendar } from "@/components/episode-calendar/EpisodeCalendar";
 import { Hotkeys } from "@/components/hotkeys/Hotkeys";
-import { redirectIfNoSession } from "@/features/auth/helpers/redirectIfNoSession";
-import { Bookmarks } from "@/features/bookmarks/components/bookmarks/Bookmarks";
+import { PinnedLinks } from "@/features/bookmarks/components/pinned-links/PinnedLinks";
 import { Search } from "@/features/search/components/search/Search";
-import { ServiceLinks } from "@/features/services/components/service-links/ServiceLinks";
 import { Weather } from "@/features/weather/components/weather/Weather";
+import styles from "./page.module.css";
 
-export default async function Page() {
-  await redirectIfNoSession();
+export default function Page() {
   return (
     <>
       <title>Your Nest • Hedge.gg</title>
-      <Weather />
-      <Search />
-      <ServiceLinks />
-      <EpisodeCalendar />
-      <Bookmarks />
+      <div className={styles.top}>
+        <Weather />
+      </div>
+      <div className={styles.mid}>
+        <Search />
+        <PinnedLinks />
+      </div>
+      <div className={styles.bottom}>
+        <EpisodeCalendar />
+      </div>
       <Hotkeys />
     </>
   );

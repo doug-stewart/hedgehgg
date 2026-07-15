@@ -1,0 +1,20 @@
+.top,
+.mid,
+.bottom {
+  align-self: center;
+  width: 100%;
+  max-width: 640px;
+}
+
+.top,
+.bottom {
+  flex: 0 0 auto;
+}
+
+.mid {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  justify-content: center;
+  margin-block: calc(var(--spacing) * 2);
+}
