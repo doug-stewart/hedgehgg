@@ -19,10 +19,6 @@ export async function up(db: Kysely<unknown>): Promise<void> {
 }
 
 export async function down(db: Kysely<unknown>): Promise<void> {
-  await sql`ALTER TABLE services DROP CONSTRAINT IF EXISTS services_user_id_fkey`.execute(
-    db,
-  );
-  await sql`ALTER TABLE profile DROP CONSTRAINT IF EXISTS profile_user_id_fkey`.execute(
-    db,
-  );
+  await sql`ALTER TABLE services DROP CONSTRAINT IF EXISTS services_user_id_fkey`.execute(db);
+  await sql`ALTER TABLE profile DROP CONSTRAINT IF EXISTS profile_user_id_fkey`.execute(db);
 }

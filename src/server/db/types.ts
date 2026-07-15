@@ -1,4 +1,4 @@
-import type { ColumnType, Generated } from "kysely";
+import type { ColumnType } from "kysely";
 
 // This interface is hand-maintained. Only the application-owned tables are
 // modelled here; the Better-Auth managed tables (user, session, account,
@@ -19,17 +19,6 @@ export interface ProfileTable {
   theme: "light" | "dark" | "system" | "geolocation" | null;
 }
 
-export interface ServicesTable {
-  id: Generated<number>;
-  user_id: string;
-  name: string;
-  href: string;
-  abbr: string;
-  icon: string | null;
-  sort_order: Generated<number>;
-}
-
 export interface Database {
   profile: ProfileTable;
-  services: ServicesTable;
 }

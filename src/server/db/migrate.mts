@@ -7,10 +7,7 @@ import { db } from "./database";
 // Runs all pending migrations from ./migrations to bring the schema up to date.
 // Run locally via `pnpm db:migrate` (after `pnpm auth:migrate`, which creates
 // the Better-Auth `user` table that migration 002 references).
-const migrationFolder = path.join(
-  path.dirname(fileURLToPath(import.meta.url)),
-  "migrations",
-);
+const migrationFolder = path.join(path.dirname(fileURLToPath(import.meta.url)), "migrations");
 
 const migrator = new Migrator({
   db,

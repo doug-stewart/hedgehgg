@@ -18,9 +18,7 @@ export async function up(db: Kysely<unknown>): Promise<void> {
   await db.schema
     .createTable("services")
     .ifNotExists()
-    .addColumn("id", "integer", (col) =>
-      col.generatedAlwaysAsIdentity().primaryKey(),
-    )
+    .addColumn("id", "integer", (col) => col.generatedAlwaysAsIdentity().primaryKey())
     .addColumn("user_id", "text", (col) => col.notNull())
     .addColumn("name", "text", (col) => col.notNull())
     .addColumn("href", "text", (col) => col.notNull())

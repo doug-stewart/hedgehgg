@@ -1,8 +1,5 @@
 import * as profileRepository from "../repositories/profileRepository";
-import type {
-  UpdateProfileInput,
-  UpdateThemeInput,
-} from "../schemas/profile.schema";
+import type { UpdateProfileInput, UpdateThemeInput } from "../schemas/profile.schema";
 
 // A user has no profile row until they save one; return an all-null profile so
 // clients get a stable shape instead of a 404 on first load.
