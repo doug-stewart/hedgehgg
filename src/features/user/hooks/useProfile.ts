@@ -4,6 +4,7 @@ import { type UseMutationResult, useMutation, useQuery } from "@tanstack/react-q
 import { useSession } from "../../auth/hooks/useSession";
 import { getProfile } from "../api/getProfile";
 import { updateProfile } from "../api/updateProfile";
+import { normalizeProfile } from "../helpers/normalizeProfile";
 import type { User } from "../types";
 
 type Profile = {
@@ -31,16 +32,7 @@ export const useProfile = (): Profile => {
     mutationFn: updateProfile,
   });
 
-  const profile = {
-    id: user?.id,
-    linkwarden_token: userQuery.data?.linkwarden_token ?? null,
-    linkwarden_url: userQuery.data?.linkwarden_url ?? null,
-    sonarr_api_key: userQuery.data?.sonarr_api_key ?? null,
-    sonarr_url: userQuery.data?.sonarr_url ?? null,
-    geolocation_latitude: userQuery.data?.geolocation_latitude ?? null,
-    geolocation_longitude: userQuery.data?.geolocation_longitude ?? null,
-    theme: userQuery.data?.theme ?? null,
-  } as User;
+  const profile = normalizeProfile(user?.id, userQuery.data);
 
   return {
     profile: profile,
