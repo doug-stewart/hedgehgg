@@ -8,9 +8,9 @@ export const useLinkwardenSearch = (query: string): { results: Array<LinkwardenL
   const { profile } = useProfile();
 
   const searchQuery = useQuery({
-    queryKey: ["user", session?.id, "search", query],
+    queryKey: ["user", session?.id, "linkwarden", "search", query],
     queryFn: async () => {
-      const response = await fetch(`/api/sonarr/upcoming`, {
+      const response = await fetch(`/api/linkwarden/search?q=${query}`, {
         credentials: "include",
       });
       const data = await response.json();
