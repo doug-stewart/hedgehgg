@@ -1,3 +1,16 @@
+export type IconData = {
+  Name: string;
+  Reference: string;
+  SVG: string;
+  PNG: string;
+  WebP: string;
+  Light: string;
+  Dark: string;
+  Category: string;
+  Tags: string;
+  CreatedAt: Date;
+};
+
 export type Link = {
   id: number;
   name: string;
