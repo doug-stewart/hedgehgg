@@ -1,21 +1,66 @@
 .tootlip {
+  --_offset: calc(var(--spacing) * 0.5);
+
   position-anchor: --tooltip;
   position: absolute;
   inset: unset;
-  position-area: top center;
   width: max-content;
   overflow: unset;
   filter: drop-shadow(0 0 2px oklch(0 0 0 / 0.2));
 }
 
+.top {
+  margin-bottom: var(--_offset);
+  position-area: top center;
+}
+
+.right {
+  margin-left: var(--_offset);
+  position-area: center right;
+}
+
+.bottom {
+  margin-top: var(--_offset);
+  position-area: bottom center;
+}
+
+.left {
+  margin-right: var(--_offset);
+  position-area: center left;
+}
+
 .arrow {
   position: absolute;
-  top: 100%;
-  left: 50%;
   display: block;
   width: 1em;
   height: 0.6em;
   background: currentColor;
   clip-path: polygon(0 0, 100% 0, 50% 100%);
-  translate: -50% 0;
+
+  .top & {
+    top: 100%;
+    left: 50%;
+    translate: -50% 0;
+  }
+
+  .right & {
+    top: 50%;
+    right: 100%;
+    rotate: 90deg;
+    translate: 0 -50%;
+  }
+
+  .bottom & {
+    bottom: 100%;
+    left: 50%;
+    rotate: 180deg;
+    translate: -50% 0;
+  }
+
+  .left & {
+    top: 50%;
+    left: 100%;
+    rotate: 270deg;
+    translate: 0 -50%;
+  }
 }
