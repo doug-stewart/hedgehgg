@@ -26,6 +26,19 @@ export type LinkwardenCollectionResponse = {
   };
 };
 
+export type LinkwardenLinksResponse = {
+  response: Array<LinkwardenResponseLink>;
+};
+
+type LinkwardenResponseTag = {
+  id: number;
+  name: string;
+};
+
+export type LinkwardenTagsResponse = {
+  response: Array<LinkwardenResponseTag>;
+};
+
 export type LinkwardenLink = {
   id: number;
   name: string;
