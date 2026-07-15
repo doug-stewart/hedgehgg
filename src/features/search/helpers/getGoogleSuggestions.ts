@@ -14,9 +14,10 @@ const performSearch = async (
 
   try {
     const response = await fetch(`/api/google/suggestions?q=${encodeURIComponent(trimmed)}`);
-
     const data = await response.json();
-    setterFn(data.slice(0, limit ?? 5) as Array<string>);
+    const unique = Array.from(new Set(data));
+    const topSuggestions = unique.slice(0, limit ?? 5);
+    setterFn(topSuggestions as Array<string>);
   } catch (error) {
     console.error("Error fetching suggestions", error);
     setterFn([]);
