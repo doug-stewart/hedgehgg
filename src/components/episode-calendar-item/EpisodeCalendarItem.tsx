@@ -12,9 +12,9 @@ export const EpisodeCalendarItem = ({ episode }: EpisodeCalendarItemProps) => {
       <time
         className={styles.when}
         dateTime={episode.airingAt}
-        title={format(episode.airingAt, "MMM do, HH:mm")}
+        title={format(episode.airingAt, "MMM do yyyy @ HH:mm")}
       >
-        {format(episode.airingAt, "eee, HH:mm")}
+        {format(episode.airingAt, "eee @ HH:mm")}
       </time>
       <span className={styles.series}>{episode.series}</span>
       <span className={styles.numbers}>

@@ -8,28 +8,19 @@
   grid-row: span 2;
   grid-column: 1 / -1;
   gap: 0 0.5em;
-  border-radius: 1em;
-
-  @container (width > 500px) {
-    grid-template-areas: "when series numbers title";
-    grid-row: span 1;
-  }
+  text-decoration: none;
 }
 
 .when,
 .numbers {
   display: flex;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: end;
   padding: 0 0.6em;
   font-size: 0.6em;
   font-weight: 600;
-  color: var(--base);
   text-transform: uppercase;
-
-  @container (width > 500px) {
-    border-radius: 0.5em;
-  }
 }
 
 .series,
@@ -42,23 +33,25 @@
 
 .when {
   grid-area: when;
+  color: var(--base);
   background: var(--text);
-  border-top-left-radius: 0.5em;
-  border-top-right-radius: 0.5em;
+  border-top-left-radius: calc(var(--spacing) * 0.24);
+  border-top-right-radius: calc(var(--spacing) * 0.24);
 }
 
 .series {
   grid-area: series;
+  font-weight: 600;
 }
 
 .numbers {
   grid-area: numbers;
-
-  background: oklch(from var(--text) l c h / 0.72);
-  border-bottom-right-radius: 0.5em;
-  border-bottom-left-radius: 0.5em;
+  background: oklch(from var(--text) l c h / 0.12);
+  border-bottom-right-radius: calc(var(--spacing) * 0.24);
+  border-bottom-left-radius: calc(var(--spacing) * 0.24);
 }
 
 .title {
   grid-area: title;
+  font-size: 0.8em;
 }
