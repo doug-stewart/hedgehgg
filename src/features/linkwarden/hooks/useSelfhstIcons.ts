@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { useTheme } from "@/features/user/hooks/useTheme";
-import type { IconData } from "../types";
+import type { SelfhstIcon } from "../types";
 
 const ICONS_URL = "https://raw.githubusercontent.com/selfhst/icons/refs/heads/main/index.json";
 
 const normalize = (string: string) => string.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
 
-export const useIcons = () => {
+export const useSelfhstIcons = () => {
   const { display } = useTheme();
   const theme = display === "dark" ? "light" : "dark";
 
@@ -20,7 +20,7 @@ export const useIcons = () => {
     staleTime: Infinity,
   });
 
-  const allIcons: Array<IconData> = data instanceof Error || data === undefined ? [] : data;
+  const allIcons: Array<SelfhstIcon> = data instanceof Error || data === undefined ? [] : data;
 
   const getMatches = (nameOrReference: string) => {
     const exactMatch = allIcons.find(
@@ -38,7 +38,7 @@ export const useIcons = () => {
       })
       .filter(Boolean);
 
-    const bestMatches: Array<IconData> = [exactMatch, semiMatch, ...wordMatches].filter(
+    const bestMatches: Array<SelfhstIcon> = [exactMatch, semiMatch, ...wordMatches].filter(
       (data) => data !== undefined,
     );
 

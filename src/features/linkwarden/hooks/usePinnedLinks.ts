@@ -3,7 +3,7 @@ import { useSession } from "@/features/auth/hooks/useSession";
 import { useProfile } from "@/features/user/hooks/useProfile";
 import type { Link } from "../types";
 
-export const usePinned = () => {
+export const usePinnedLinks = () => {
   const { session, isLoggedIn } = useSession();
   const { profile } = useProfile();
   const hasLinkwarden = Object.hasOwn(profile || {}, "linkwarden_token");

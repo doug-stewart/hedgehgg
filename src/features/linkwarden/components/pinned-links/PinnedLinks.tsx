@@ -1,11 +1,11 @@
 "use client";
 
-import { usePinned } from "../../hooks/usePinned";
+import { usePinnedLinks } from "../../hooks/usePinnedLinks";
 import { PinnedLink } from "../pinned-link/PinnedLink";
 import styles from "./PinnedLinks.module.css";
 
 export const PinnedLinks = () => {
-  const { pinned } = usePinned();
+  const { pinned } = usePinnedLinks();
 
   return (
     <ul className={styles.links}>

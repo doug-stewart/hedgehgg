@@ -1,4 +1,4 @@
-export type IconData = {
+export type SelfhstIcon = {
   Name: string;
   Reference: string;
   SVG: string;
@@ -11,7 +11,7 @@ export type IconData = {
   CreatedAt: Date;
 };
 
-export type Link = {
+export type LinkwardenLink = {
   id: number;
   name: string;
   url: string;
@@ -19,12 +19,10 @@ export type Link = {
   createdAt: string;
 };
 
-export type Collection = {
+export type LinkwardenCollection = {
   id: number;
   name: string;
   description: string;
   createdAt: string;
-  links: Array<Link>;
+  links: Array<LinkwardenLink>;
 };
-
-export type Bookmarks = Array<Collection>;

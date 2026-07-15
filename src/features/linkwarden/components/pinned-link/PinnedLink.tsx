@@ -5,14 +5,14 @@ import { Tooltip } from "@/components/tooltip/Tooltip";
 import { useTheme } from "@/features/user/hooks/useTheme";
 import { useTooltip } from "@/hooks/useTooltip";
 import { getAbbr } from "../../helpes/getAbbr";
-import { useIcons } from "../../hooks/useIcons";
-import type { Link as TLink } from "../../types";
+import { useSelfhstIcons } from "../../hooks/useSelfhstIcons";
+import type { LinkwardenLink } from "../../types";
 import styles from "./PinnedLink.module.css";
 
-export const PinnedLink = ({ link }: { link: TLink }) => {
+export const PinnedLink = ({ link }: { link: LinkwardenLink }) => {
   const id = useId();
   const { tooltipRef, toggleTooltip } = useTooltip();
-  const { getIconUrl } = useIcons();
+  const { getIconUrl } = useSelfhstIcons();
   const { display: theme } = useTheme();
 
   const icon = getIconUrl(link.name);

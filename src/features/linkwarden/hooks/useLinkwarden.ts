@@ -3,10 +3,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { useProfile } from "@/features/user/hooks/useProfile";
 import { useSession } from "../../auth/hooks/useSession";
-import type { Bookmarks } from "../types";
+import type { LinkwardenCollection } from "../types";
 
 type LinkwardenStore = {
-  bookmarks: Bookmarks | [];
+  bookmarks: Array<LinkwardenCollection>;
   isLoading: boolean;
   isSuccess: boolean;
 };
@@ -17,13 +17,13 @@ export const useLinkwarden = (): LinkwardenStore => {
   const hasLinkwarden = Object.hasOwn(profile || {}, "linkwarden_token");
 
   const { data, isLoading, isSuccess } = useQuery({
-    queryKey: ["user", session?.id, "bookmarks"],
+    queryKey: ["user", session?.id, "linkwarden", "links"],
     queryFn: async () => {
       const response = await fetch(`/api/linkwarden/all`, {
         credentials: "include",
       });
       const data = await response.json();
-      return data as Error | Bookmarks;
+      return data as Error | Array<LinkwardenCollection>;
     },
     staleTime: Infinity,
     enabled: isLoggedIn && hasLinkwarden,
