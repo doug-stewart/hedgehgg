@@ -11,7 +11,7 @@ import styles from "./PinnedLink.module.css";
 
 export const PinnedLink = ({ link }: { link: LinkwardenLink }) => {
   const id = useId();
-  const { tooltipRef, showTooltip, hideTooltip } = useTooltip();
+  const { tooltipRef, showTooltip, hideTooltip, toggleTooltip } = useTooltip();
   const { getIconUrl } = useSelfhstIcons();
   const { display: theme } = useTheme();
 
@@ -25,11 +25,10 @@ export const PinnedLink = ({ link }: { link: LinkwardenLink }) => {
         className={styles.link}
         href={link.url}
         onBlur={hideTooltip}
+        onClick={toggleTooltip}
         onFocus={showTooltip}
         onMouseEnter={showTooltip}
         onMouseLeave={hideTooltip}
-        popoverTarget={`pin-${id}`}
-        popoverTargetAction="toggle"
       >
         {icon ? (
           <>
