@@ -1,10 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { Combobox } from "../../../../components/combobox/Combobox";
+import { useLinkwardenSearch } from "../../../linkwarden/hooks/useLinkwardenSearch";
 import { getGoogleSuggestions } from "../../helpers/getGoogleSuggestions";
-import { useLinkwardenSearch } from "../../hooks/useLinkwardenSearch";
 import { useSearchStore } from "../../stores/search.store";
 import styles from "./Search.module.css";
 
@@ -31,16 +31,13 @@ export const Search = () => {
     window.open(url, target, "noopener noreferrer");
   };
 
-  const collatedOptions = useMemo(
-    () => [
-      ...suggestions.map((suggestion) => ({
-        label: suggestion,
-        value: suggestion,
-      })),
-      ...results.map((result) => ({ label: result.name, value: result.url })),
-    ],
-    [suggestions, results],
-  );
+  const collatedOptions = [
+    ...suggestions.map((suggestion) => ({
+      label: suggestion,
+      value: suggestion,
+    })),
+    ...results.map((result) => ({ label: result.name, value: result.url })),
+  ];
 
   return (
     <FormProvider {...formProps}>
