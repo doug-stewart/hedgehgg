@@ -1,0 +1,53 @@
+.item {
+  anchor-scope: --tooltip;
+  container-type: inline-size;
+  anchor-name: --tooltip;
+}
+
+.link {
+  --_alpha: 6%;
+
+  display: grid;
+  grid-template: 1fr / 1fr;
+  padding: 24cqi;
+  text-decoration: none;
+  background-color: oklch(from currentcolor l c h / var(--_alpha));
+  border-radius: calc(var(--spacing) * 0.36);
+
+  &:hover {
+    --_alpha: 12%;
+  }
+}
+
+.icon {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+}
+
+span.icon {
+  display: grid;
+  place-items: center;
+  font-size: 24cqi;
+  font-weight: 600;
+  color: oklch(from var(--base) l c h / 48%);
+  background-color: var(--text);
+  border-radius: 50%;
+}
+
+.color {
+  opacity: 0;
+
+  :hover > & {
+    opacity: 1;
+  }
+}
+
+.monochrome {
+  opacity: 1;
+
+  :hover > & {
+    opacity: 0;
+  }
+}
