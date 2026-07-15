@@ -36,7 +36,10 @@ export const Search = () => {
       label: suggestion,
       value: suggestion,
     })),
-    ...results.map((result) => ({ label: result.name, value: result.url })),
+    ...results.map((result) => ({
+      label: result.name,
+      value: `${result.id}-${result.url}`,
+    })),
   ];
 
   return (
