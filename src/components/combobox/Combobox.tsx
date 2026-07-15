@@ -1,8 +1,6 @@
-"use client";
-
 import clsx from "clsx";
 import { type KeyboardEvent, useEffect, useId, useRef, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { useController, useFormContext } from "react-hook-form";
 import styles from "./Combobox.module.css";
 
 type ComboboxProps = {
@@ -25,9 +23,9 @@ export const Combobox = ({
   id,
   className,
 }: ComboboxProps) => {
-  const { register, watch, setValue, resetField } = useFormContext();
-  const inputValue = watch(name);
-  const { ref: rhfRef, onChange: onRHFChange, ...rhfProps } = register(name);
+  const { control, resetField } = useFormContext();
+  const { field } = useController({ name, control });
+  const inputValue = field.value ?? "";
 
   const uid = useId();
   const internalId = id || uid;
@@ -40,14 +38,8 @@ export const Combobox = ({
   const [selectedOption, setSelectedOption] = useState("");
   const [listFocused, setListFocused] = useState(false);
 
-  const filteredOptions = options.filter((option) =>
-    [option.value.toLowerCase(), option.label.toLowerCase()].some((text) =>
-      text.includes(inputValue.toLowerCase() || ""),
-    ),
-  );
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onRHFChange(event);
+    field.onChange(event);
     onChange?.(event.target.value);
   };
 
@@ -61,7 +53,7 @@ export const Combobox = ({
 
     if (label && value) {
       onAccept?.(value);
-      setValue(name, label);
+      field.onChange(label);
       setOpen(false);
     }
   };
@@ -86,14 +78,14 @@ export const Combobox = ({
 
     if (event.ctrlKey || event.shiftKey || event.metaKey) return;
 
-    const length = inputValue.value?.length;
+    const length = inputValue?.length;
 
-    const matches = filteredOptions.find((option) => option.value === selectedOption);
+    const matches = options.find((option) => option.value === selectedOption);
 
-    const matchesIndex = filteredOptions.findIndex((option) => option.value === selectedOption);
+    const matchesIndex = options.findIndex((option) => option.value === selectedOption);
 
-    const nextOption = filteredOptions.at(matchesIndex + 1) || filteredOptions.at(0);
-    const prevOption = filteredOptions.at(matchesIndex - 1) || filteredOptions.at(-1);
+    const nextOption = options.at(matchesIndex + 1) || options.at(0);
+    const prevOption = options.at(matchesIndex - 1) || options.at(-1);
 
     setOpen(true);
 
@@ -104,7 +96,7 @@ export const Combobox = ({
         }
 
         if (listFocused && matches) {
-          setValue(name, matches.label);
+          field.onChange(matches.label);
         }
 
         setOpen(false);
@@ -114,7 +106,7 @@ export const Combobox = ({
       case "ArrowDown":
         flag = true;
 
-        if (filteredOptions.length === 0) break;
+        if (options.length === 0) break;
 
         setOpen(true);
 
@@ -152,7 +144,7 @@ export const Combobox = ({
       case "Tab":
         if (matches && listFocused) {
           flag = true;
-          setValue(name, matches.label);
+          field.onChange(matches.label);
         }
 
         setSelectedOption("");
@@ -233,20 +225,21 @@ export const Combobox = ({
         data-1p-ignore
         data-testid="combobox"
         id={internalId}
+        name={field.name}
+        onBlur={field.onBlur}
         onChange={handleChange}
         onFocus={handleFocus}
         onKeyDown={(event) => handleKeyPress(event)}
         popoverTarget={`${internalId}-list`}
         ref={(e) => {
-          rhfRef(e);
+          field.ref(e);
           input.current = e;
         }}
         role="combobox"
         type="text"
         value={inputValue}
-        {...rhfProps}
       />
-      {open && filteredOptions.length > 0 && (
+      {open && options.length > 0 && (
         <div
           aria-expanded={open}
           aria-label={label}
@@ -256,7 +249,7 @@ export const Combobox = ({
           ref={list}
           role="listbox"
         >
-          {filteredOptions.map(({ value, label }) => (
+          {options.map(({ value, label }) => (
             <div
               aria-selected={value === selectedOption}
               className={clsx(styles.option, {

@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { useLinkwardenSearch } from "@/features/bookmarks/hooks/useLinkwardenSearch";
 import { Combobox } from "../../../../components/combobox/Combobox";
 import { getGoogleSuggestions } from "../../helpers/getGoogleSuggestions";
 import { useSearchStore } from "../../stores/search.store";
@@ -14,10 +15,11 @@ export const Search = () => {
 
   const formProps = useForm({ defaultValues: { search: "" } });
   const { watch } = formProps;
-
   const searchValue = watch("search");
 
-  const onGetSuggestions = (value = "") => {
+  const { results } = useLinkwardenSearch(searchValue);
+
+  const getSuggestions = async (value = "") => {
     searchStore.setFilter(value);
     getGoogleSuggestions(value, setSuggestions);
   };
@@ -29,20 +31,26 @@ export const Search = () => {
     window.open(url, target, "noopener noreferrer");
   };
 
+  const collatedOptions = useMemo(
+    () => [
+      ...suggestions.map((suggestion) => ({
+        label: suggestion,
+        value: suggestion,
+      })),
+      ...results.map((result) => ({ label: result.name, value: result.url })),
+    ],
+    [suggestions, results],
+  );
+
   return (
     <FormProvider {...formProps}>
-      <form onKeyDown={onSubmit} onSubmit={(e) => e.preventDefault()}>
+      <form className={styles.form} onKeyDown={onSubmit} onSubmit={(e) => e.preventDefault()}>
         <Combobox
           className={styles.search}
           label="Search..."
           name="search"
-          onChange={onGetSuggestions}
-          options={
-            suggestions.map((suggestion) => ({
-              label: suggestion,
-              value: suggestion,
-            })) || []
-          }
+          onChange={getSuggestions}
+          options={collatedOptions}
         />
         <a
           aria-disabled={!searchValue}
