@@ -10,9 +10,6 @@ export async function GET(request: Request) {
     const data = (await response.json()) as Array<unknown>;
     return NextResponse.json((data[1] as Array<string>) ?? []);
   } catch (_error) {
-    return NextResponse.json(
-      { error: "Failed to fetch suggestions" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Failed to fetch suggestions" }, { status: 500 });
   }
 }
