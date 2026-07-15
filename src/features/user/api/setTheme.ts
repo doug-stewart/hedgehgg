@@ -22,7 +22,7 @@ export const setTheme = async (theme: ThemeValue): Promise<ThemeValue> => {
 
     return data;
   } catch (error) {
-    console.error("Error deleting service:", error);
+    console.error("Error setting theme:", error);
     throw error;
   }
 };
