@@ -1,5 +1,7 @@
 "use client";
 
+import { useHotkey } from "@tanstack/react-hotkeys";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import Hedgehgg from "@/assets/images/hedgehgg.svg";
 import { UserMenu } from "@/features/user/components/user-menu/UserMenu";
@@ -8,6 +10,11 @@ import styles from "./AppHeader.module.css";
 
 export const AppHeader = () => {
   const { display } = useTheme();
+  const queryClient = useQueryClient();
+
+  useHotkey({ key: "r", shift: true }, () => {
+    queryClient.invalidateQueries({ refetchType: "all" });
+  });
 
   useEffect(() => {
     document.querySelector("html")?.setAttribute("data-theme", display);
