@@ -1,5 +1,6 @@
 "use client";
 
+import { useHotkey } from "@tanstack/react-hotkeys";
 import clsx from "clsx";
 import { useEffect, useId, useRef, useState } from "react";
 import { useLinkwardenSearch } from "../../../linkwarden/hooks/useLinkwardenSearch";
@@ -116,6 +117,10 @@ export const SearchForm = () => {
       selectPrevOption();
     }
   };
+
+  useHotkey({ key: "/", shift: true }, () => {
+    input.current?.focus();
+  });
 
   useEffect(() => {
     if ((suggestions.length === 0 && links.length === 0) || !open) {
