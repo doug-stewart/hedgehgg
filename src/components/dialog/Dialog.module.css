@@ -1,0 +1,21 @@
+.dialog {
+  border: 1px solid oklch(from currentcolor l c h / 12%);
+  background-color: var(--base);
+  border-radius: calc(var(--spacing) * 0.36);
+  margin: auto;
+  max-width: 640px;
+  padding: 2.4rem;
+  width: calc(100vw - calc(var(--spacing) * 1));
+
+  &::backdrop {
+    background: oklch(from var(--base) l c h / 36%);
+    backdrop-filter: blur(6px);
+  }
+}
+
+.close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  translate: 50% -50%;
+}
