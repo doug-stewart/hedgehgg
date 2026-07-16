@@ -1,4 +1,3 @@
-"use client";
 "use no memo";
 
 import { zodResolver } from "@hookform/resolvers/zod";
