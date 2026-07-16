@@ -118,7 +118,7 @@ export const SearchForm = () => {
     }
   };
 
-  useHotkey({ key: "/", shift: true }, () => {
+  useHotkey({ key: "f", shift: true }, () => {
     input.current?.focus();
   });
 
