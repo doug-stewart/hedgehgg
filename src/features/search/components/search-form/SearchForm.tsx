@@ -7,7 +7,7 @@ import { executeSearch } from "../../helpers/executeSearch";
 import { getGoogleSuggestions } from "../../helpers/getGoogleSuggestions";
 import { selectNextPrevOption } from "../../helpers/selectNextPrevOption";
 import { SearchListItem } from "../search-list-item/SearchListItem";
-import styles from "./Search.module.css";
+import styles from "./SearchForm.module.css";
 
 const interceptKeys = ["Enter", "ArrowDown", "ArrowUp", "Escape", "Home", "End"];
 
