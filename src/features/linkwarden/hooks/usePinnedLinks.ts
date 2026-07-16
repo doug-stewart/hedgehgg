@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "@/features/auth/hooks/useSession";
 import { useProfile } from "@/features/user/hooks/useProfile";
-import type { Link } from "../types";
+import type { LinkwardenLink } from "../types";
 
 export const usePinnedLinks = () => {
   const { session, isLoggedIn } = useSession();
@@ -15,7 +15,7 @@ export const usePinnedLinks = () => {
         credentials: "include",
       });
       const data = await response.json();
-      return data as Error | Array<Link>;
+      return data as Error | Array<LinkwardenLink>;
     },
     staleTime: Infinity,
     enabled: isLoggedIn && hasLinkwarden,
