@@ -103,14 +103,11 @@ export const getLinkwardenSearchResults = async (
         (response) => response.json() as Promise<LinkwardenCollectionResponse>,
       );
 
-    // Group 1: links whose title matches the query. The Linkwarden search is
-    // multi-field, so narrow the results down to name matches only.
     const titleResponse = await searchLinks(`searchQueryString=${encodeURIComponent(query)}`);
     const titleMatches = titleResponse.data.links.filter((link) =>
       link.name.toLowerCase().includes(q),
     );
 
-    // Group 2: links in collections whose name matches the query.
     const { response: collections } = (await fetch(`${host}/api/v1/collections`, fetchOptions).then(
       (response) => response.json(),
     )) as LinkwardenCollectionsResponse;
@@ -124,7 +121,6 @@ export const getLinkwardenSearchResults = async (
     );
     const collectionMatches = collectionResponses.flatMap((response) => response.data.links);
 
-    // Group 3: links tagged with a tag whose name matches the query.
     const tags = await fetch(`${host}/api/v1/tags`, fetchOptions)
       .then((response) => response.json())
       .then((data) => data.data.tags as Array<LinkwardenLink>);
@@ -135,14 +131,12 @@ export const getLinkwardenSearchResults = async (
     );
     const tagMatches = tagResponses.flatMap((response) => response.data.links);
 
-    // Combine in priority order, de-duplicating by id so a link that matches
-    // more than one group stays at its highest-priority position.
-    const seen = new Set<number>();
+    const seen = new Set<string>();
     const results: Array<LinkwardenLink> = [];
 
     for (const link of [...titleMatches, ...collectionMatches, ...tagMatches]) {
-      if (seen.has(link.id)) continue;
-      seen.add(link.id);
+      if (seen.has(link.name)) continue;
+      seen.add(link.name);
       results.push(toLink(link));
     }
 

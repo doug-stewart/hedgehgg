@@ -1,0 +1,11 @@
+.option {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  cursor: pointer;
+
+  &[aria-selected="true"] {
+    background-color: lightgray;
+  }
+}

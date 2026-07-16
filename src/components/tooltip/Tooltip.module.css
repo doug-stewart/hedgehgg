@@ -7,6 +7,12 @@
   width: max-content;
   overflow: unset;
   filter: drop-shadow(0 0 2px oklch(0 0 0 / 0.2));
+  visibility: hidden;
+
+  :hover > &,
+  :focus-within > & {
+    visibility: visible;
+  }
 }
 
 .top {

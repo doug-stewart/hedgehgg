@@ -1,0 +1,48 @@
+.box {
+  anchor-scope: --combobox;
+  display: inline-grid;
+  position: relative;
+  width: 100%;
+  grid-template: "input" auto / auto;
+  z-index: 100;
+}
+
+.input {
+  width: 100%;
+  grid-area: input;
+  anchor-name: --combobox;
+  padding-block: calc(var(--spacing) * 0.33);
+  padding-inline: calc(var(--spacing) * 0.66);
+  font-size: 1.5rem;
+  border: unset;
+  border-radius: 0.5rem;
+}
+
+.list {
+  inset: auto;
+  margin: 0;
+  position: absolute;
+  left: anchor(left);
+  top: anchor(bottom);
+  position-anchor: --combobox;
+  width: anchor-size(width);
+  min-width: 0;
+  max-height: min(320px, 40vh);
+
+  &::backdrop {
+    display: none;
+  }
+}
+
+.clear {
+  grid-area: input;
+  align-self: center;
+  justify-self: end;
+}
+
+.button {
+  &[aria-disabled="true"] {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
