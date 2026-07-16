@@ -1,5 +1,3 @@
-"use no memo";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
 import type * as z from "zod";
@@ -26,7 +24,7 @@ export const ProfileForm = ({ profile }: { profile: User }) => {
     mode: "onBlur",
     reValidateMode: "onChange",
     resolver: zodResolver(profileSchema),
-    defaultValues: initial,
+    values: initial,
   });
 
   const {
@@ -68,7 +66,7 @@ export const ProfileForm = ({ profile }: { profile: User }) => {
     });
   };
 
-  return profile === null ? null : (
+  return (
     <FormProvider {...formProps}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <fieldset className={styles.fieldset}>

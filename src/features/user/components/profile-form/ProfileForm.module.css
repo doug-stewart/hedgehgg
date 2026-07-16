@@ -2,6 +2,10 @@
   display: grid;
   grid-template-columns: max-content 1fr;
   grid-auto-rows: auto auto;
+
+  label:has(input[type="radio"]:checked) {
+    color: red;
+  }
 }
 
 .fieldset,

@@ -19,10 +19,8 @@ type Profile = {
 export const useProfile = (): Profile => {
   const { session, isLoggedIn } = useSession();
 
-  const user = session?.user;
-
   const userQuery = useQuery({
-    queryKey: ["user", user?.id],
+    queryKey: ["user", session?.id],
     queryFn: async () => getProfile(),
     staleTime: Infinity,
     enabled: isLoggedIn,
@@ -32,7 +30,7 @@ export const useProfile = (): Profile => {
     mutationFn: updateProfile,
   });
 
-  const profile = normalizeProfile(user?.id, userQuery.data);
+  const profile = normalizeProfile(session?.id, userQuery.data);
 
   return {
     profile: profile,
