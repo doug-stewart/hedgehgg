@@ -1,11 +1,11 @@
 .dialog {
-  border: 1px solid oklch(from currentcolor l c h / 12%);
-  background-color: var(--base);
-  border-radius: calc(var(--spacing) * 0.36);
-  margin: auto;
+  width: calc(100vw - calc(var(--spacing) * 1));
   max-width: 640px;
   padding: 2.4rem;
-  width: calc(100vw - calc(var(--spacing) * 1));
+  margin: auto;
+  background-color: var(--base);
+  border: 1px solid oklch(from currentcolor l c h / 12%);
+  border-radius: calc(var(--spacing) * 0.36);
 
   &::backdrop {
     background: oklch(from var(--base) l c h / 36%);
