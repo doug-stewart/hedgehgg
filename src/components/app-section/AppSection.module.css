@@ -28,7 +28,7 @@
     flex: 1;
     height: 1px;
     content: "";
-    background: oklch(from var(--text) l c h / 0.12);
+    background: oklch(from var(--color-on-primary) l c h / 0.12);
   }
 
   & > span {

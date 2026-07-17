@@ -2,9 +2,40 @@
   /* Layout */
   --spacing: clamp(1.125rem, 2.25vi + 0.563rem, 2.25rem); /* 18px, 36px */
 
-  /* Theme */
-  --text: light-dark(#1a1a1a, #f9f9f9);
-  --base: light-dark(#ffffff, #121212);
+  /* COLORS */
+  /* Primary */
+  --color-bg-primary: light-dark(#180b1d, #180b1d);
+  --color-bg-primary-action: light-dark(#ffffff, #121212);
+  --color-bg-primary-disabled: light-dark(#ffffff, #121212);
+  --color-bg-primary-focus: light-dark(#ffffff, #121212);
+  --color-bg-primary-hover: light-dark(#ffffff, #121212);
+  --color-on-primary: light-dark(#d7e3fe, #d7e3fe);
+  --color-on-primary-action: light-dark(#d7e3fe, #d7e3fe);
+  --color-on-primary-error: light-dark(#d7e3fe, #d7e3fe);
+  --color-on-primary-focus: light-dark(#d7e3fe, #d7e3fe);
+  --color-on-primary-success: light-dark(#d7e3fe, #d7e3fe);
+  /* Secondary */
+  --color-bg-secondary: light-dark(#231c59, #231c59);
+  --color-bg-secondary-action: light-dark(#f9f9f9, #1a1a1a);
+  --color-bg-secondary-disabled: light-dark(#f9f9f9, #1a1a1a);
+  --color-bg-secondary-focus: light-dark(#f9f9f9, #1a1a1a);
+  --color-bg-secondary-hover: light-dark(#f9f9f9, #1a1a1a);
+  --color-on-secondary: light-dark(#d7e3fe, #d7e3fe);
+  --color-on-secondary-action: light-dark(#d7e3fe, #d7e3fe);
+  --color-on-secondary-error: light-dark(#d7e3fe, #d7e3fe);
+  --color-on-secondary-focus: light-dark(#d7e3fe, #d7e3fe);
+  --color-on-secondary-success: light-dark(#d7e3fe, #d7e3fe);
+  /* Tertiary */
+  --color-bg-tertiary: light-dark(#5e2364, #5e2364);
+  --color-bg-tertiary-action: light-dark(#f9f9f9, #1a1a1a);
+  --color-bg-tertiary-disabled: light-dark(#f9f9f9, #1a1a1a);
+  --color-bg-tertiary-focus: light-dark(#f9f9f9, #1a1a1a);
+  --color-bg-tertiary-hover: light-dark(#f9f9f9, #1a1a1a);
+  --color-on-tertiary: light-dark(#d7e3fe, #d7e3fe);
+  --color-on-tertiary-action: light-dark(#d7e3fe, #d7e3fe);
+  --color-on-tertiary-error: light-dark(#d7e3fe, #d7e3fe);
+  --color-on-tertiary-focus: light-dark(#d7e3fe, #d7e3fe);
+  --color-on-tertiary-success: light-dark(#d7e3fe, #d7e3fe);
 
   color-scheme: light dark;
 }
@@ -24,6 +55,6 @@ body {
   font:
     300 1em / 1.4 var(--font-noto-sans),
     sans-serif;
-  color: var(--text);
-  background: var(--base);
+  color: var(--color-on-primary);
+  background: var(--color-primary);
 }

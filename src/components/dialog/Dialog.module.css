@@ -3,12 +3,12 @@
   max-width: 640px;
   padding: 2.4rem;
   margin: auto;
-  background-color: var(--base);
+  background-color: var(--color-primary);
   border: 1px solid oklch(from currentcolor l c h / 12%);
   border-radius: calc(var(--spacing) * 0.36);
 
   &::backdrop {
-    background: oklch(from var(--base) l c h / 36%);
+    background: oklch(from var(--color-primary) l c h / 36%);
     backdrop-filter: blur(6px);
   }
 }

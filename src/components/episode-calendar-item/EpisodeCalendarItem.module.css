@@ -33,8 +33,8 @@
 
 .when {
   grid-area: when;
-  color: var(--base);
-  background: var(--text);
+  color: var(--color-primary);
+  background: var(--color-on-primary);
   border-top-left-radius: calc(var(--spacing) * 0.24);
   border-top-right-radius: calc(var(--spacing) * 0.24);
 }
@@ -46,7 +46,7 @@
 
 .numbers {
   grid-area: numbers;
-  background: oklch(from var(--text) l c h / 0.12);
+  background: oklch(from var(--color-on-primary) l c h / 0.12);
   border-bottom-right-radius: calc(var(--spacing) * 0.24);
   border-bottom-left-radius: calc(var(--spacing) * 0.24);
 }

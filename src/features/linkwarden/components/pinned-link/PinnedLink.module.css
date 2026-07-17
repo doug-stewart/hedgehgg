@@ -31,8 +31,8 @@ span.icon {
   place-items: center;
   font-size: 24cqi;
   font-weight: 600;
-  color: oklch(from var(--base) l c h / 48%);
-  background-color: var(--text);
+  color: oklch(from var(--color-primary) l c h / 48%);
+  background-color: var(--color-on-primary);
   border-radius: 50%;
 }
 

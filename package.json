@@ -49,5 +49,10 @@
     "tsx": "^4.23.0",
     "typescript": "^5"
   },
+  "browserslist": [
+    "last 1 chrome version",
+    "last 1 firefox version",
+    "safari >= 17.5"
+  ],
   "packageManager": "pnpm@11.11.0+sha512.4463f65fd80ed80d69bc1d4bf163ee94f605c7380fc318bb5b2ebe15f8cd12d49c51a4d59e951b401e764d3b6ca751cbf51bc50ed7001a6bcb4935e684c34882"
 }
