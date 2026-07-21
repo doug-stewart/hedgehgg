@@ -5,49 +5,35 @@
 }
 
 .link {
-  --_alpha: 6%;
-
   display: grid;
   grid-template: 1fr / 1fr;
   padding: 24cqi;
-  text-decoration: none;
-  background-color: oklch(from currentcolor l c h / var(--_alpha));
-  border-radius: calc(var(--spacing) * 0.36);
 
-  &:hover {
-    --_alpha: 12%;
+  &:not(:hover) {
+    --_bg: transparent;
+    --_text: var(--color-on-primary);
+
+    opacity: 0.72;
   }
 }
 
 .icon {
   grid-area: 1 / 1;
   width: 100%;
-  height: auto;
+  height: 100%;
   aspect-ratio: 1;
+  background-color: currentColor;
+  mask-image: var(--svg);
+  mask-position: center;
+  mask-size: contain;
 }
 
-span.icon {
+.abbr {
   display: grid;
   place-items: center;
   font-size: 24cqi;
   font-weight: 600;
-  color: oklch(from var(--color-primary) l c h / 48%);
+  color: oklch(from var(--color-bg-primary) l c h / 48%);
   background-color: var(--color-on-primary);
   border-radius: 50%;
-}
-
-.color {
-  opacity: 0;
-
-  :hover > & {
-    opacity: 1;
-  }
-}
-
-.monochrome {
-  opacity: 1;
-
-  :hover > & {
-    opacity: 0;
-  }
 }
