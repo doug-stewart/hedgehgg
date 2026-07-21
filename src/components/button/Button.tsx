@@ -7,7 +7,7 @@ import styles from "./Button.module.css";
 
 export const Button = ({ kind = "primary", className, children, ...props }: ButtonProps) => {
   const { href, onClick, value, type, popoverTarget } = props;
-  const classes = clsx(styles.button, styles[kind], className);
+  const classes = clsx(kind !== "inline" && styles.button, styles[kind], className);
 
   if (href) {
     return (

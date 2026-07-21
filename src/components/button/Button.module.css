@@ -1,12 +1,14 @@
 .button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   padding-block: calc(var(--spacing) * 0.36);
   padding-inline: calc(var(--spacing) * 0.6);
   font-size: 0.8em;
   font-weight: 600;
   line-height: 1.1;
   color: var(--_text);
+  text-align: center;
   text-transform: uppercase;
   background-color: var(--_bg);
   border-radius: calc(var(--spacing) * 0.24);
@@ -55,4 +57,26 @@
 .danger {
   --_bg: var(--color-bg-error);
   --_text: var(--color-on-error);
+}
+
+.inline {
+  display: inline-flex;
+  gap: 0.5em;
+  align-items: center;
+  padding: unset;
+  color: var(--color-accent);
+  text-decoration: underline;
+
+  &:hover {
+    color: color-mix(in oklch, var(--color-on-primary), var(--color-accent));
+  }
+
+  &:focus {
+    outline: unset;
+  }
+
+  &:focus-visible {
+    outline: 1px solid oklch(from var(--color-accent) l c h / 24%);
+    outline-offset: 2px;
+  }
 }

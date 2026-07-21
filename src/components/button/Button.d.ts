@@ -6,7 +6,7 @@ import type {
 } from "react";
 
 type CommonBase = PropsWithChildren<{
-  kind?: "primary" | "secondary" | "tertiary" | "danger";
+  kind?: "primary" | "secondary" | "tertiary" | "danger" | "inline";
   className?: string;
 }>;
 
