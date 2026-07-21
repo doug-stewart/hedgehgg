@@ -3,6 +3,7 @@
 import { useHotkey } from "@tanstack/react-hotkeys";
 import clsx from "clsx";
 import { useEffect, useId, useRef, useState } from "react";
+import CloseIcon from "@/assets/images/close.svg";
 import { useLinkwardenSearch } from "../../../linkwarden/hooks/useLinkwardenSearch";
 import { executeSearch } from "../../helpers/executeSearch";
 import { getGoogleSuggestions } from "../../helpers/getGoogleSuggestions";
@@ -30,24 +31,24 @@ export const SearchForm = () => {
   const reset = () => {
     setSelected("");
     setValue("");
-    setOpen(false);
+    list.current?.hidePopover();
   };
 
   const setNewValue = (value: string) => {
     setSelected(value);
     setValue(value);
-    setOpen(false);
+    list.current?.hidePopover();
   };
 
   const selectNextOption = () => {
     const next = selectNextPrevOption(1, suggestions, links, selected);
-    setOpen(!!next);
+    if (next) list.current?.showPopover();
     next && setSelected(next);
   };
 
   const selectPrevOption = () => {
     const prev = selectNextPrevOption(-1, suggestions, links, selected);
-    setOpen(!!prev);
+    if (prev) list.current?.showPopover();
     prev && setSelected(prev);
   };
 
@@ -62,7 +63,7 @@ export const SearchForm = () => {
       return;
     }
 
-    setOpen(true);
+    list.current?.showPopover();
     setValue(newValue);
     setSelected("");
     getGoogleSuggestions(newValue, setSuggestions);
@@ -88,7 +89,7 @@ export const SearchForm = () => {
     event.preventDefault();
 
     if (key === "Escape") {
-      setOpen(false);
+      list.current?.hidePopover();
     }
 
     if (key === "Home") {
@@ -118,17 +119,21 @@ export const SearchForm = () => {
     }
   };
 
+  const handleListToggle = (event: React.ToggleEvent<HTMLDivElement>) => {
+    setOpen(event.newState === "open");
+  };
+
   useHotkey({ key: "f", shift: true }, () => {
     input.current?.focus();
   });
 
   useEffect(() => {
-    if ((suggestions.length === 0 && links.length === 0) || !open) {
+    if (!open) {
       list.current?.hidePopover();
       return;
     }
     list.current?.showPopover();
-  }, [suggestions, links, open]);
+  }, [open]);
 
   useEffect(() => {
     if (!open || !selected) return;
@@ -137,39 +142,44 @@ export const SearchForm = () => {
   }, [open, selected]);
 
   return (
-    <div className={styles.search}>
+    <div
+      className={clsx(styles.box, open && styles.open)}
+      data-testid="container"
+      ref={container}
+      style={{ anchorScope: `--anchor` }}
+    >
+      <input
+        aria-autocomplete="list"
+        aria-controls={`${id}-list`}
+        aria-expanded={open}
+        autoCapitalize="off"
+        autoComplete="off"
+        className={styles.input}
+        data-1p-ignore
+        id={id}
+        onChange={handleInputChange}
+        onKeyDown={handleInputKey}
+        placeholder="Ask the interlink?"
+        popoverTarget={`${id}-list`}
+        ref={input}
+        role="combobox"
+        type="search"
+        value={value}
+      />
       <div
-        className={styles.box}
-        data-testid="container"
-        ref={container}
-        style={{ anchorScope: `--anchor` }}
+        aria-expanded={open}
+        aria-label={"Search"}
+        className={clsx(
+          styles.list,
+          suggestions.length === 0 && links.length === 0 && styles.empty,
+        )}
+        id={`${id}-list`}
+        onToggle={handleListToggle}
+        popover="auto"
+        ref={list}
+        role="listbox"
       >
-        <input
-          aria-autocomplete="list"
-          aria-controls={`${id}-list`}
-          aria-expanded={open}
-          autoCapitalize="off"
-          autoComplete="off"
-          className={styles.input}
-          data-1p-ignore
-          id={id}
-          onChange={handleInputChange}
-          onKeyDown={handleInputKey}
-          popoverTarget={`${id}-list`}
-          ref={input}
-          role="combobox"
-          type="search"
-          value={value}
-        />
-        <div
-          aria-expanded={open}
-          aria-label={"Search"}
-          className={clsx(styles.list)}
-          id={`${id}-list`}
-          popover="auto"
-          ref={list}
-          role="listbox"
-        >
+        <div className={clsx(styles.items)}>
           {suggestions.map((suggestion) => (
             <SearchListItem
               key={suggestion}
@@ -188,20 +198,12 @@ export const SearchForm = () => {
             />
           ))}
         </div>
-        {value !== "" && (
-          <button className={styles.clear} onClick={reset} title="clear" type="button">
-            <span role="presentation">&times;</span>
-          </button>
-        )}
       </div>
-      <a
-        aria-disabled={!value}
-        className={styles.button}
-        href={`https://www.google.com/search?q=${encodeURIComponent(value)}`}
-        rel="noopener noreferrer"
-      >
-        Search
-      </a>
+      {value !== "" && (
+        <button className={styles.clear} onClick={reset} title="Clear search" type="button">
+          <CloseIcon />
+        </button>
+      )}
     </div>
   );
 };
