@@ -1,3 +1,27 @@
+@property --_bottom {
+  inherits: false;
+  initial-value: 0;
+  syntax: "<length>";
+}
+
+@property --_top {
+  inherits: false;
+  initial-value: 0;
+  syntax: "<length>";
+}
+
+@keyframes scroll {
+  from {
+    --_bottom: calc(var(--spacing) * 0.6);
+    --_top: 0rem;
+  }
+
+  to {
+    --_bottom: 0;
+    --_top: calc(var(--spacing) * 0.6);
+  }
+}
+
 .box {
   anchor-scope: --combobox;
   display: inline-grid;
@@ -7,42 +31,91 @@
   z-index: 100;
 }
 
+.open {
+  outline: calc(var(--spacing) * 0.36) solid var(--color-bg-secondary);
+  background-color: var(--color-bg-secondary);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+
+  &:has(.empty) {
+    border-bottom-right-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+  }
+}
+
 .input {
   width: 100%;
   grid-area: input;
   anchor-name: --combobox;
-  padding-block: calc(var(--spacing) * 0.33);
-  padding-inline: calc(var(--spacing) * 0.66);
+  padding-block: calc(var(--spacing) * 0.36);
+  padding-inline: calc(var(--spacing) * 0.6);
   font-size: 1.5rem;
   border: unset;
   border-radius: 0.5rem;
+  z-index: 1;
+
+  .open &:focus-visible {
+    outline: unset;
+  }
 }
 
 .list {
+  background-color: var(--color-bg-secondary);
+  border: unset;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
   inset: auto;
   margin: 0;
   position: absolute;
-  left: anchor(left);
+  left: calc(anchor(left) - calc(var(--spacing) * 0.36));
   top: anchor(bottom);
   position-anchor: --combobox;
-  width: anchor-size(width);
-  min-width: 0;
-  max-height: min(320px, 40vh);
+  width: calc(anchor-size(width) + var(--spacing) * 0.36 * 2);
 
   &::backdrop {
     display: none;
   }
 }
 
-.clear {
-  grid-area: input;
-  align-self: center;
-  justify-self: end;
+.empty {
+  display: none;
 }
 
-.button {
-  &[aria-disabled="true"] {
-    pointer-events: none;
-    opacity: 0.5;
+.items {
+  min-width: 0;
+  max-height: min(320px, 40vh);
+  padding: calc(var(--spacing) * 0.36) calc(var(--spacing) * 0.36)
+    calc(var(--spacing) * 0.6);
+  overflow: auto;
+
+  h3 {
+    margin: calc(var(--spacing) * 0.36) calc(var(--spacing) * 0.36);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+  }
+}
+
+.clear {
+  z-index: 2;
+  display: flex;
+  grid-area: input;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  width: auto;
+  height: 100%;
+  aspect-ratio: 1;
+  padding: 0;
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  svg {
+    width: 36%;
+    height: 36%;
   }
 }
