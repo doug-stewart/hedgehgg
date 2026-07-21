@@ -1,4 +1,7 @@
 .show {
+  --_radius: calc(var(--spacing) * 0.24);
+  --_height: 2lh;
+
   display: grid;
   grid-template-areas:
     "when series"
@@ -8,6 +11,7 @@
   grid-row: span 2;
   grid-column: 1 / -1;
   gap: 0 0.5em;
+  align-items: center;
   text-decoration: none;
 }
 
@@ -17,6 +21,7 @@
   flex: 0 0 auto;
   align-items: center;
   justify-content: end;
+  height: var(--_height);
   padding: 0 0.6em;
   font-size: 0.6em;
   font-weight: 600;
@@ -33,10 +38,9 @@
 
 .when {
   grid-area: when;
-  color: var(--color-primary);
-  background: var(--color-on-primary);
-  border-top-left-radius: calc(var(--spacing) * 0.24);
-  border-top-right-radius: calc(var(--spacing) * 0.24);
+  color: var(--color-on-secondary);
+  background: var(--color-bg-secondary);
+  border-radius: var(--_radius);
 }
 
 .series {
@@ -46,9 +50,11 @@
 
 .numbers {
   grid-area: numbers;
-  background: oklch(from var(--color-on-primary) l c h / 0.12);
-  border-bottom-right-radius: calc(var(--spacing) * 0.24);
-  border-bottom-left-radius: calc(var(--spacing) * 0.24);
+  color: color-mix(
+    in oklch,
+    var(--color-on-primary) 60%,
+    var(--color-bg-secondary)
+  );
 }
 
 .title {
