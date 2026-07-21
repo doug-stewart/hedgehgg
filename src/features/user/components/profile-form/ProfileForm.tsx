@@ -1,6 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import clsx from "clsx";
 import { FormProvider, type SubmitHandler, useForm } from "react-hook-form";
 import type * as z from "zod";
+import { Button } from "@/components/button/Button";
+import buttonStyles from "@/components/button/Button.module.css";
 import { profileSchema } from "../../helpers/profileSchema";
 import { themes } from "../../helpers/themes";
 import { useProfile } from "../../hooks/useProfile";
@@ -69,15 +72,16 @@ export const ProfileForm = ({ profile }: { profile: User }) => {
   return (
     <FormProvider {...formProps}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <fieldset className={styles.fieldset}>
+        <fieldset className={clsx(styles.fieldset, styles.appearance)}>
           <legend>Appearance</legend>
           <div className={styles.field}>
             {themes.map((theme) => (
-              <label key={theme.value}>
-                <span>
-                  <theme.icon role="presentation" />
-                  {theme.label}
-                </span>
+              <label
+                className={clsx(styles.radio, buttonStyles.button, buttonStyles.secondary)}
+                key={theme.value}
+              >
+                <theme.icon role="presentation" />
+                {theme.label}
                 <input type="radio" value={theme.value} {...register("theme")} />
               </label>
             ))}
@@ -132,11 +136,13 @@ export const ProfileForm = ({ profile }: { profile: User }) => {
               <span className={styles.error}>{errors.geolocation_longitude.message}</span>
             )}
           </label>
-          <button onClick={getLocation} type="button">
+          <Button kind="secondary" onClick={getLocation} type="button">
             Get Current Location
-          </button>
+          </Button>
         </fieldset>
-        <button type="submit">Update</button>
+        <Button kind="primary" type="submit">
+          Update
+        </Button>
       </form>
     </FormProvider>
   );
