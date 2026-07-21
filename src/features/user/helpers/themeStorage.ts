@@ -1,21 +1,20 @@
 import type { ThemeValue } from "../types";
 
-export const THEME_KEY = "hedgehgg:theme";
-export const THEME_DISPLAY_KEY = "hedgehgg:theme-display";
+export const THEME_COOKIE = "theme-display";
 
-export const applyTheme = (theme: ThemeValue, display: ThemeValue): void => {
+const ONE_YEAR = 60 * 60 * 24 * 365;
+
+/**
+ * Applies the resolved theme to the DOM and caches it for the next session.
+ *
+ * Sets `data-theme` on <html> and writes the resolved value to a cookie so the
+ * root layout can server-render `<html data-theme>` on the next load, before
+ * any paint — avoiding a flash of the wrong theme.
+ */
+export const applyTheme = (display: ThemeValue): void => {
   try {
     document.documentElement.setAttribute("data-theme", display);
-    localStorage.setItem(THEME_KEY, theme);
-    localStorage.setItem(THEME_DISPLAY_KEY, display);
+    // biome-ignore lint/suspicious/noDocumentCookie: synchronous write is required so the cookie is set before the next navigation/paint
+    document.cookie = `${THEME_COOKIE}=${display}; path=/; max-age=${ONE_YEAR}; samesite=lax`;
   } catch {}
 };
-
-export const themeInitScript = (): string =>
-  `(function(){try{` +
-  `var pref=localStorage.getItem("${THEME_KEY}");` +
-  `var last=localStorage.getItem("${THEME_DISPLAY_KEY}");` +
-  `var dark=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";` +
-  `var resolved=pref==="light"||pref==="dark"?pref:pref==="system"?dark:pref==="geolocation"?(last||dark):last;` +
-  `if(resolved)document.documentElement.setAttribute("data-theme",resolved);` +
-  `}catch(e){}})();`;

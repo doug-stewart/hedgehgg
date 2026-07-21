@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
+import { cookies } from "next/headers";
 import Providers from "@/components/providers/Providers";
 import { NotificationsList } from "@/features/notifications/components/notifications-list/NotificationsList";
-import { themeInitScript } from "@/features/user/helpers/themeStorage";
+import { THEME_COOKIE } from "@/features/user/helpers/themeStorage";
 import "@/styles/reset.css";
 import "@/styles/index.css";
 
@@ -20,16 +21,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const stored = (await cookies()).get(THEME_COOKIE)?.value;
+  const dataTheme = stored === "light" || stored === "dark" ? stored : undefined;
+
   return (
-    <html className={notoSans.variable} lang="en" suppressHydrationWarning>
+    <html className={notoSans.variable} data-theme={dataTheme} lang="en" suppressHydrationWarning>
       <body>
-        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Static file to initialize user theme choice */}
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript() }} />
         <Providers>
           <NotificationsList />
           {children}

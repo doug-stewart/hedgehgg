@@ -10,7 +10,7 @@ import { useTheme } from "@/features/user/hooks/useTheme";
 import styles from "./AppHeader.module.css";
 
 export const AppHeader = () => {
-  const { theme, display } = useTheme();
+  const { display, isLoaded } = useTheme();
   const queryClient = useQueryClient();
 
   useHotkey({ key: "r", shift: true }, () => {
@@ -18,8 +18,9 @@ export const AppHeader = () => {
   });
 
   useEffect(() => {
-    applyTheme(theme, display);
-  }, [theme, display]);
+    if (!isLoaded) return;
+    applyTheme(display);
+  }, [isLoaded, display]);
 
   return (
     <header className={styles.masthead}>
