@@ -85,6 +85,42 @@ dialog {
   }
 }
 
+fieldset {
+  width: 100%;
+  min-width: 0;
+  padding: unset;
+  margin: unset;
+  margin-block: calc(var(--spacing) * 0.6);
+  border: unset;
+
+  &:first-child {
+    margin-block-start: unset;
+  }
+
+  &:last-child {
+    margin-block-end: unset;
+  }
+}
+
+legend {
+  display: flex;
+  grid-column: 1 / -1;
+  gap: calc(var(--spacing) * 0.36);
+  align-items: center;
+  width: 100%;
+  padding: unset;
+  margin: 0 auto calc(var(--spacing) * 0.6) 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  &::after,
+  &::before {
+    flex: 1;
+    content: "";
+    border-bottom: 1px solid oklch(from currentcolor l c h / 12%);
+  }
+}
+
 input {
   padding-block: calc(var(--spacing) * 0.36);
   padding-inline: calc(var(--spacing) * 0.6);

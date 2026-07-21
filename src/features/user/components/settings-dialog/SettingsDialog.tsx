@@ -5,7 +5,7 @@ import { useProfile } from "../../hooks/useProfile";
 import { ProfileForm } from "../profile-form/ProfileForm";
 
 export const SettingsDialog = ({ buttonClassName }: { buttonClassName?: string }) => {
-  const { dialogRef, openDialog } = useDialog();
+  const { dialogRef, openDialog, closeDialog } = useDialog();
   const { profile } = useProfile();
 
   const openSettings = () => {
@@ -20,7 +20,7 @@ export const SettingsDialog = ({ buttonClassName }: { buttonClassName?: string }
         Settings
       </button>
       <Dialog dialogRef={dialogRef} showClose>
-        <ProfileForm profile={profile} />
+        <ProfileForm onFormReset={closeDialog} onFormSubmit={closeDialog} profile={profile} />
       </Dialog>
     </>
   );
