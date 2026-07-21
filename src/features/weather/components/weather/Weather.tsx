@@ -58,8 +58,10 @@ export const Weather = () => {
             <dt>AQI</dt>
             <dd>
               {forecast.aqi}
-              <span>{forecast.pm25} pm2.5</span>
-              <span>{forecast.pm10} pm10</span>
+              <span role="presentation">|</span>
+              {forecast.pm25} pm2.5
+              <span role="presentation">|</span>
+              {forecast.pm10} pm10
             </dd>
             <dt>Rain</dt>
             <dd>{forecast.precipitation}%</dd>
@@ -67,8 +69,7 @@ export const Weather = () => {
             <dd>{forecast.windspeed} mph</dd>
             <dt>UV Index</dt>
             <dd>
-              {forecast.uvIndex.value}
-              <span>{forecast.uvIndex.explanation}</span>
+              {forecast.uvIndex.value} ({forecast.uvIndex.explanation})
             </dd>
           </dl>
         </Tooltip>

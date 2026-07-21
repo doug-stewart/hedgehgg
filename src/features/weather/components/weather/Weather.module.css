@@ -21,14 +21,25 @@
   grid-area: title;
   font-size: 0.8em;
   font-weight: 600;
+  color: color-mix(
+    in oklch,
+    var(--color-on-primary) 60%,
+    var(--color-bg-primary)
+  );
 }
 
 .icon {
   grid-area: icon;
-  width: calc(var(--spacing) * 1.44);
+  width: calc(var(--spacing) * 1.56);
   height: auto;
   aspect-ratio: 1;
   margin-right: calc(var(--spacing) * 0.12);
+  background-color: light-dark(
+    oklch(from var(--color-bg-primary) calc(l * 1.24) c h),
+    oklch(from var(--color-bg-primary) calc(l * 0.72) c h)
+  );
+  border: 1px solid oklch(from var(--color-on-primary) l c h / 12%);
+  border-radius: calc(var(--spacing) * 0.36);
 }
 
 .explanation {
@@ -37,27 +48,17 @@
 
 .stats {
   display: grid;
-  grid-area: stats;
-  grid-template-columns: repeat(5, max-content);
-  gap: 0 calc(var(--spacing) * 0.5);
-
-  text-align: center;
+  grid-template-columns: auto 1fr;
+  gap: calc(var(--spacing) * 0.24);
+  padding: calc(var(--spacing) * 0.24) calc(var(--spacing) * 0.48);
+  font-weight: 400;
 
   dt {
-    grid-row: 1;
-    font-size: 0.6em;
-    text-transform: uppercase;
+    font-weight: 700;
   }
 
-  dd {
-    grid-row: 2;
-    font-size: 0.8em;
-    font-weight: 700;
-
-    span {
-      display: block;
-      font-size: 0.75em;
-      font-weight: 400;
-    }
+  span {
+    margin-inline: calc(var(--spacing) * 0.24);
+    opacity: 0.24;
   }
 }
