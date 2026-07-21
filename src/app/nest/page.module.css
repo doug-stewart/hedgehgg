@@ -3,7 +3,7 @@
 .bottom {
   align-self: center;
   width: 100%;
-  max-width: 640px;
+  max-width: 540px;
 }
 
 .top,
@@ -15,6 +15,7 @@
   display: flex;
   flex: 1 0 auto;
   flex-direction: column;
+  gap: var(--spacing);
   justify-content: center;
   margin-block: calc(var(--spacing) * 2);
 }
