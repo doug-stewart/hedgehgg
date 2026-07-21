@@ -1,6 +1,8 @@
 import clsx from "clsx";
 import { type PropsWithChildren, useEffect } from "react";
 import { createPortal } from "react-dom";
+import CloseIcon from "@/assets/images/close.svg";
+import { Button } from "../button/Button";
 import styles from "./Dialog.module.css";
 
 type DialogProps = PropsWithChildren<{
@@ -44,14 +46,9 @@ export const Dialog = ({
   return createPortal(
     <dialog className={clsx(styles.dialog, className)} ref={dialogRef}>
       {showClose && (
-        <button
-          className={clsx(styles.close, closeClassName)}
-          onClick={closeDialog}
-          title="Close"
-          type="button"
-        >
-          <span role="presentation">&times;</span>
-        </button>
+        <Button className={clsx(styles.close, closeClassName)} kind="danger" onClick={closeDialog}>
+          <CloseIcon title="Close" />
+        </Button>
       )}
       {children}
     </dialog>,
