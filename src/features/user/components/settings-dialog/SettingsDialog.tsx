@@ -4,7 +4,7 @@ import { useDialog } from "@/hooks/useDialog";
 import { useProfile } from "../../hooks/useProfile";
 import { ProfileForm } from "../profile-form/ProfileForm";
 
-export const SettingsDialog = () => {
+export const SettingsDialog = ({ buttonClassName }: { buttonClassName?: string }) => {
   const { dialogRef, openDialog } = useDialog();
   const { profile } = useProfile();
 
@@ -16,7 +16,7 @@ export const SettingsDialog = () => {
 
   return (
     <>
-      <button onClick={openSettings} type="button">
+      <button className={buttonClassName} onClick={openSettings} type="button">
         Settings
       </button>
       <Dialog dialogRef={dialogRef} showClose>
