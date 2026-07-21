@@ -5,11 +5,12 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import Hedgehgg from "@/assets/images/hedgehgg.svg";
 import { UserMenu } from "@/features/user/components/user-menu/UserMenu";
+import { applyTheme } from "@/features/user/helpers/themeStorage";
 import { useTheme } from "@/features/user/hooks/useTheme";
 import styles from "./AppHeader.module.css";
 
 export const AppHeader = () => {
-  const { display } = useTheme();
+  const { theme, display } = useTheme();
   const queryClient = useQueryClient();
 
   useHotkey({ key: "r", shift: true }, () => {
@@ -17,8 +18,8 @@ export const AppHeader = () => {
   });
 
   useEffect(() => {
-    document.querySelector("html")?.setAttribute("data-theme", display);
-  }, [display]);
+    applyTheme(theme, display);
+  }, [theme, display]);
 
   return (
     <header className={styles.masthead}>

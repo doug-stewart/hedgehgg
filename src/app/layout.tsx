@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
 import Providers from "@/components/providers/Providers";
 import { NotificationsList } from "@/features/notifications/components/notifications-list/NotificationsList";
+import { themeInitScript } from "@/features/user/helpers/themeStorage";
 import "@/styles/reset.css";
 import "@/styles/index.css";
 
@@ -25,8 +26,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className={notoSans.variable} lang="en">
+    <html className={notoSans.variable} lang="en" suppressHydrationWarning>
       <body>
+        {/* biome-ignore lint/security/noDangerouslySetInnerHtml: Static file to initialize user theme choice */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript() }} />
         <Providers>
           <NotificationsList />
           {children}
